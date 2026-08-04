@@ -1,0 +1,418 @@
+{
+ "ticker": "VALE3",
+ "tipo_documento": "ITR",
+ "etapas": {
+  "validacao": "ok",
+  "busca_cvm": "ok",
+  "download": "ok",
+  "extracao": {
+   "status": "ok",
+   "secoes": 6
+  },
+  "indexacao": {
+   "status": "ok",
+   "chunks": 6
+  },
+  "recuperacao": "ok",
+  "geracao": "ok",
+  "auditoria": "ok"
+ },
+ "analise": {
+  "dados_extraidos": {
+   "periodo_referencia": "2026-03-31",
+   "periodos": {
+    "periodo_atual": "1º trimestre de 2026, encerrado em 31/03/2026",
+    "comparacao_resultado": "1º trimestre de 2025 (mesmo período do ano anterior)",
+    "comparacao_balanco": "31/12/2025 (fechamento do exercício anterior)",
+    "nota": "No ITR, receita e lucro são acumulados desde o início do ano e comparam com o mesmo período acumulado do ano anterior; caixa, dívidas e demais contas do balanço são posições na data de referência e comparam com o fechamento do exercício anterior (31/12)."
+   },
+   "base_dados": "Consolidado",
+   "escala_original": "R$ milhares (mil reais)",
+   "metodo_calculo": "deterministico_python",
+   "receita_principal": {
+    "descricao": "Receita de Venda de Bens e/ou Serviços",
+    "valor_atual": "R$ 48,68 bilhões",
+    "valor_anterior": "R$ 47,41 bilhões",
+    "variacao_pct": "+2,7%",
+    "comparacao": "1º trimestre de 2025 (mesmo período do ano anterior)"
+   },
+   "lucro_liquido": {
+    "valor_atual": "R$ 10,20 bilhões",
+    "valor_anterior": "R$ 8,17 bilhões",
+    "variacao_pct": "+24,8%",
+    "comparacao": "1º trimestre de 2025 (mesmo período do ano anterior)",
+    "interpretacao_variacao": "o lucro cresceu 24,8%",
+    "margem_liquida_pct": "20,95%",
+    "contexto_por_100_reais": "a cada R$ 100 de receita, sobraram R$ 20,95 de lucro"
+   },
+   "ebitda": {
+    "valor_atual": "R$ 17,10 bilhões",
+    "valor_anterior": "R$ 14,99 bilhões",
+    "variacao_pct": "+14,1%",
+    "comparacao": "1º trimestre de 2025 (mesmo período do ano anterior)",
+    "criterio": "EBITDA aproximado = resultado antes do resultado financeiro e dos tributos (DRE) + depreciação e amortização (DFC). A CVM não publica o EBITDA nos dados estruturados; esta aproximação pode diferir do valor divulgado pela empresa.",
+    "margem_pct": "35,13%"
+   },
+   "endividamento": {
+    "criterio": "Dívida bruta = empréstimos e financiamentos (circulante + não circulante). Liquidez total = caixa e equivalentes + aplicações financeiras de curto prazo. Dívida líquida = dívida bruta − liquidez total. Passivos de arrendamento (IFRS 16, aluguéis contratados) são informados separadamente na visão ampliada.",
+    "divida_bruta": "R$ 98,32 bilhões",
+    "divida_bruta_anterior": "R$ 103,46 bilhões",
+    "variacao_divida_pct": "-5,0%",
+    "caixa_e_equivalentes": "R$ 26,54 bilhões",
+    "caixa_anterior": "R$ 40,56 bilhões",
+    "variacao_caixa_pct": "-34,6%",
+    "aplicacoes_financeiras": "R$ 1,01 bilhões",
+    "liquidez_total": "R$ 27,55 bilhões",
+    "divida_liquida": "R$ 70,77 bilhões",
+    "divida_liquida_anterior": "R$ 61,83 bilhões",
+    "comparacao": "31/12/2025 (fechamento do exercício anterior)"
+   },
+   "outros_destaques": [
+    "Patrimônio Líquido: R$ 195,91 bilhões (variação +3,7%)",
+    "Ativo Total: R$ 457,17 bilhões (variação -4,0%)",
+    "Resultado Bruto: R$ 16,26 bilhões",
+    "Resultado operacional (antes de juros e impostos): R$ 12,67 bilhões (variação +16,4%)",
+    "Resultado de Equivalência Patrimonial: R$ 187,00 milhões",
+    "Lucro atribuído a sócios da controladora: R$ 9,95 bilhões"
+   ],
+   "dados_ausentes": [],
+   "advertencias": [
+    "O caixa e equivalentes caiu -34,6% (de R$ 40,56 bilhões para R$ 26,54 bilhões).",
+    "O Ativo Total diminuiu -4,0% no período."
+   ]
+  },
+  "secoes": {
+   "RESUMO": "A Vale S.A. apresentou um desempenho financeiro positivo no 1º trimestre de 2026, encerrado em 31/03/2026, com um lucro líquido de R$ 10,20 bilhões, representando um crescimento de 24,8% em comparação com o mesmo período do ano anterior. A receita da empresa também cresceu, atingindo R$ 48,68 bilhões. No entanto, a saúde do caixa merece atenção, pois o dinheiro disponível em caixa e equivalentes diminuiu significativamente.",
+   "O QUE A EMPRESA FATURA": "A empresa gera sua receita principalmente pela venda de bens e/ou serviços. No 1º trimestre de 2026, a Vale S.A. faturou R$ 48,68 bilhões. Esse valor representa um crescimento de 2,7% em relação ao 1º trimestre de 2025 (mesmo período do ano anterior), quando a receita foi de R$ 47,41 bilhões. Essa receita é o dinheiro que entra na empresa pela sua atividade principal.",
+   "LUCRO": "A Vale S.A. registrou um lucro líquido de R$ 10,20 bilhões no 1º trimestre de 2026. Esse resultado representa um crescimento expressivo de 24,8% em comparação com o 1º trimestre de 2025 (mesmo período do ano anterior), quando o lucro foi de R$ 8,17 bilhões. Para contextualizar, a cada R$ 100 que a empresa faturou, sobraram R$ 20,95 de lucro. O aumento do lucro foi impulsionado por um crescimento de 16,4% no resultado operacional (antes de juros e impostos) e uma melhora significativa nas receitas e despesas com juros, que passaram de um resultado negativo de R$ 1,18 bilhão para R$ 211 milhões negativos.",
+   "SAUDE DO CAIXA E DIVIDAS": "A empresa encerrou o período com R$ 27,55 bilhões em liquidez total (que inclui dinheiro em caixa e aplicações financeiras de curto prazo). A dívida bruta da Vale S.A. foi de R$ 98,32 bilhões, o que representa uma diminuição de 5,0% em relação ao fechamento do exercício anterior (31/12/2025). No entanto, o dinheiro em caixa e equivalentes caiu 34,6%, passando de R$ 40,56 bilhões para R$ 26,54 bilhões no mesmo período de comparação. Como resultado, a dívida líquida da empresa aumentou para R$ 70,77 bilhões, comparado a R$ 61,83 bilhões em 31/12/2025. Na prática, isso significa que, embora a empresa tenha reduzido sua dívida total, a diminuição do caixa fez com que a dívida líquida (dívida total menos o dinheiro disponível) aumentasse.",
+   "O QUE FOI POSITIVO": "- O lucro líquido cresceu 24,8%, atingindo R$ 10,20 bilhões.\n- A receita de venda de bens e/ou serviços aumentou 2,7%, para R$ 48,68 bilhões.\n- A dívida bruta da empresa diminuiu 5,0%, passando para R$ 98,32 bilhões.\n- O resultado operacional (antes de juros e impostos) cresceu 16,4%, indicando uma melhora na eficiência das operações.\n- O resultado financeiro (que inclui receitas e despesas com juros) melhorou significativamente, passando de R$ 1,18 bilhão negativo para R$ 211 milhões negativos.",
+   "O QUE MERECE ATENCAO": "- O dinheiro em caixa e equivalentes caiu 34,6%, de R$ 40,56 bilhões para R$ 26,54 bilhões.\n- A dívida líquida aumentou de R$ 61,83 bilhões para R$ 70,77 bilhões, apesar da redução da dívida bruta.\n- O Ativo Total da empresa diminuiu 4,0% no período.\n- O caixa líquido das atividades de financiamento ficou mais negativo, principalmente devido a um aumento nos pagamentos de dividendos e juros sobre capital próprio aos acionistas, que totalizaram R$ 14,47 bilhões.",
+   "LIMITACOES DESTA ANALISE": "Não foram identificados dados ausentes que pudessem limitar esta análise. Esta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo."
+  },
+  "narrativa_completa": "### RESUMO\nA Vale S.A. apresentou um desempenho financeiro positivo no 1º trimestre de 2026, encerrado em 31/03/2026, com um lucro líquido de R$ 10,20 bilhões, representando um crescimento de 24,8% em comparação com o mesmo período do ano anterior. A receita da empresa também cresceu, atingindo R$ 48,68 bilhões. No entanto, a saúde do caixa merece atenção, pois o dinheiro disponível em caixa e equivalentes diminuiu significativamente.\n\n### O QUE A EMPRESA FATURA\nA empresa gera sua receita principalmente pela venda de bens e/ou serviços. No 1º trimestre de 2026, a Vale S.A. faturou R$ 48,68 bilhões. Esse valor representa um crescimento de 2,7% em relação ao 1º trimestre de 2025 (mesmo período do ano anterior), quando a receita foi de R$ 47,41 bilhões. Essa receita é o dinheiro que entra na empresa pela sua atividade principal.\n\n### LUCRO\nA Vale S.A. registrou um lucro líquido de R$ 10,20 bilhões no 1º trimestre de 2026. Esse resultado representa um crescimento expressivo de 24,8% em comparação com o 1º trimestre de 2025 (mesmo período do ano anterior), quando o lucro foi de R$ 8,17 bilhões. Para contextualizar, a cada R$ 100 que a empresa faturou, sobraram R$ 20,95 de lucro. O aumento do lucro foi impulsionado por um crescimento de 16,4% no resultado operacional (antes de juros e impostos) e uma melhora significativa nas receitas e despesas com juros, que passaram de um resultado negativo de R$ 1,18 bilhão para R$ 211 milhões negativos.\n\n### SAÚDE DO CAIXA E DÍVIDAS\nA empresa encerrou o período com R$ 27,55 bilhões em liquidez total (que inclui dinheiro em caixa e aplicações financeiras de curto prazo). A dívida bruta da Vale S.A. foi de R$ 98,32 bilhões, o que representa uma diminuição de 5,0% em relação ao fechamento do exercício anterior (31/12/2025). No entanto, o dinheiro em caixa e equivalentes caiu 34,6%, passando de R$ 40,56 bilhões para R$ 26,54 bilhões no mesmo período de comparação. Como resultado, a dívida líquida da empresa aumentou para R$ 70,77 bilhões, comparado a R$ 61,83 bilhões em 31/12/2025. Na prática, isso significa que, embora a empresa tenha reduzido sua dívida total, a diminuição do caixa fez com que a dívida líquida (dívida total menos o dinheiro disponível) aumentasse.\n\n### O QUE FOI POSITIVO\n- O lucro líquido cresceu 24,8%, atingindo R$ 10,20 bilhões.\n- A receita de venda de bens e/ou serviços aumentou 2,7%, para R$ 48,68 bilhões.\n- A dívida bruta da empresa diminuiu 5,0%, passando para R$ 98,32 bilhões.\n- O resultado operacional (antes de juros e impostos) cresceu 16,4%, indicando uma melhora na eficiência das operações.\n- O resultado financeiro (que inclui receitas e despesas com juros) melhorou significativamente, passando de R$ 1,18 bilhão negativo para R$ 211 milhões negativos.\n\n### O QUE MERECE ATENÇÃO\n- O dinheiro em caixa e equivalentes caiu 34,6%, de R$ 40,56 bilhões para R$ 26,54 bilhões.\n- A dívida líquida aumentou de R$ 61,83 bilhões para R$ 70,77 bilhões, apesar da redução da dívida bruta.\n- O Ativo Total da empresa diminuiu 4,0% no período.\n- O caixa líquido das atividades de financiamento ficou mais negativo, principalmente devido a um aumento nos pagamentos de dividendos e juros sobre capital próprio aos acionistas, que totalizaram R$ 14,47 bilhões.\n\n### LIMITAÇÕES DESTA ANÁLISE\nNão foram identificados dados ausentes que pudessem limitar esta análise. Esta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo.",
+  "periodo": "2026-03-31",
+  "auditoria": {
+   "verificacoes": [
+    {
+     "secao": "RESUMO",
+     "trecho": "R$ 10,20 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 10,20 bilhões",
+     "origem_fato": "métrica calculada: lucro_liquido.valor_atual"
+    },
+    {
+     "secao": "RESUMO",
+     "trecho": "R$ 48,68 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 48,68 bilhões",
+     "origem_fato": "documento CVM: \"Receita de Venda de Bens e/ou Serviços\" = 48.680.000 (R$ mil)"
+    },
+    {
+     "secao": "RESUMO",
+     "trecho": "24,8%",
+     "tipo": "percentual",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "24,8%",
+     "origem_fato": "métrica calculada: lucro_liquido.variacao_pct"
+    },
+    {
+     "secao": "O QUE A EMPRESA FATURA",
+     "trecho": "R$ 48,68 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 48,68 bilhões",
+     "origem_fato": "documento CVM: \"Receita de Venda de Bens e/ou Serviços\" = 48.680.000 (R$ mil)"
+    },
+    {
+     "secao": "O QUE A EMPRESA FATURA",
+     "trecho": "R$ 47,41 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 47,41 bilhões",
+     "origem_fato": "métrica calculada: receita_principal.valor_anterior"
+    },
+    {
+     "secao": "O QUE A EMPRESA FATURA",
+     "trecho": "2,7%",
+     "tipo": "percentual",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "2,7%",
+     "origem_fato": "métrica calculada: receita_principal.variacao_pct"
+    },
+    {
+     "secao": "LUCRO",
+     "trecho": "R$ 10,20 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 10,20 bilhões",
+     "origem_fato": "métrica calculada: lucro_liquido.valor_atual"
+    },
+    {
+     "secao": "LUCRO",
+     "trecho": "R$ 8,17 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 8,17 bilhões",
+     "origem_fato": "métrica calculada: lucro_liquido.valor_anterior"
+    },
+    {
+     "secao": "LUCRO",
+     "trecho": "R$ 1,18 bilhão",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "-R$ 1,18 bilhões",
+     "origem_fato": "documento CVM: \"Resultado financeiro, líquido\" (anterior) = -1.182.000 (R$ mil)"
+    },
+    {
+     "secao": "LUCRO",
+     "trecho": "R$ 211 milhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "-R$ 211,00 milhões",
+     "origem_fato": "documento CVM: \"Resultado financeiro, líquido\" = -211.000 (R$ mil)"
+    },
+    {
+     "secao": "LUCRO",
+     "trecho": "R$ 100",
+     "tipo": "reais",
+     "veredito": "IGNORADO",
+     "fato_mais_proximo": null,
+     "origem_fato": "recurso didático (não conta na taxa)"
+    },
+    {
+     "secao": "LUCRO",
+     "trecho": "R$ 20,95",
+     "tipo": "reais",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 20,95",
+     "origem_fato": "métrica calculada: lucro_liquido.contexto_por_100_reais"
+    },
+    {
+     "secao": "LUCRO",
+     "trecho": "24,8%",
+     "tipo": "percentual",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "24,8%",
+     "origem_fato": "métrica calculada: lucro_liquido.variacao_pct"
+    },
+    {
+     "secao": "LUCRO",
+     "trecho": "16,4%",
+     "tipo": "percentual",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "16,4%",
+     "origem_fato": "métrica calculada: outros_destaques"
+    },
+    {
+     "secao": "SAUDE DO CAIXA E DIVIDAS",
+     "trecho": "R$ 27,55 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 27,55 bilhões",
+     "origem_fato": "métrica calculada: endividamento.liquidez_total"
+    },
+    {
+     "secao": "SAUDE DO CAIXA E DIVIDAS",
+     "trecho": "R$ 98,32 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 98,32 bilhões",
+     "origem_fato": "métrica calculada: endividamento.divida_bruta"
+    },
+    {
+     "secao": "SAUDE DO CAIXA E DIVIDAS",
+     "trecho": "R$ 40,56 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 40,56 bilhões",
+     "origem_fato": "métrica calculada: endividamento.caixa_anterior"
+    },
+    {
+     "secao": "SAUDE DO CAIXA E DIVIDAS",
+     "trecho": "R$ 26,54 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 26,54 bilhões",
+     "origem_fato": "documento CVM: \"Caixa e Equivalentes de Caixa\" = 26.540.000 (R$ mil)"
+    },
+    {
+     "secao": "SAUDE DO CAIXA E DIVIDAS",
+     "trecho": "R$ 70,77 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 70,77 bilhões",
+     "origem_fato": "métrica calculada: endividamento.divida_liquida"
+    },
+    {
+     "secao": "SAUDE DO CAIXA E DIVIDAS",
+     "trecho": "R$ 61,83 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 61,83 bilhões",
+     "origem_fato": "métrica calculada: endividamento.divida_liquida_anterior"
+    },
+    {
+     "secao": "SAUDE DO CAIXA E DIVIDAS",
+     "trecho": "5,0%",
+     "tipo": "percentual",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "-5,0%",
+     "origem_fato": "métrica calculada: endividamento.variacao_divida_pct"
+    },
+    {
+     "secao": "SAUDE DO CAIXA E DIVIDAS",
+     "trecho": "34,6%",
+     "tipo": "percentual",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "-34,6%",
+     "origem_fato": "métrica calculada: endividamento.variacao_caixa_pct"
+    },
+    {
+     "secao": "O QUE FOI POSITIVO",
+     "trecho": "R$ 10,20 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 10,20 bilhões",
+     "origem_fato": "métrica calculada: lucro_liquido.valor_atual"
+    },
+    {
+     "secao": "O QUE FOI POSITIVO",
+     "trecho": "R$ 48,68 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 48,68 bilhões",
+     "origem_fato": "documento CVM: \"Receita de Venda de Bens e/ou Serviços\" = 48.680.000 (R$ mil)"
+    },
+    {
+     "secao": "O QUE FOI POSITIVO",
+     "trecho": "R$ 98,32 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 98,32 bilhões",
+     "origem_fato": "métrica calculada: endividamento.divida_bruta"
+    },
+    {
+     "secao": "O QUE FOI POSITIVO",
+     "trecho": "R$ 1,18 bilhão",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 1,18 bilhões",
+     "origem_fato": "documento CVM: \"Resultado Financeiro\" (anterior) = 1.182.000 (R$ mil)"
+    },
+    {
+     "secao": "O QUE FOI POSITIVO",
+     "trecho": "R$ 211 milhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "-R$ 211,00 milhões",
+     "origem_fato": "documento CVM: \"Resultado financeiro, líquido\" = -211.000 (R$ mil)"
+    },
+    {
+     "secao": "O QUE FOI POSITIVO",
+     "trecho": "24,8%",
+     "tipo": "percentual",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "24,8%",
+     "origem_fato": "métrica calculada: lucro_liquido.variacao_pct"
+    },
+    {
+     "secao": "O QUE FOI POSITIVO",
+     "trecho": "2,7%",
+     "tipo": "percentual",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "2,7%",
+     "origem_fato": "métrica calculada: receita_principal.variacao_pct"
+    },
+    {
+     "secao": "O QUE FOI POSITIVO",
+     "trecho": "5,0%",
+     "tipo": "percentual",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "-5,0%",
+     "origem_fato": "métrica calculada: endividamento.variacao_divida_pct"
+    },
+    {
+     "secao": "O QUE FOI POSITIVO",
+     "trecho": "16,4%",
+     "tipo": "percentual",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "16,4%",
+     "origem_fato": "métrica calculada: outros_destaques"
+    },
+    {
+     "secao": "O QUE MERECE ATENCAO",
+     "trecho": "R$ 40,56 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 40,56 bilhões",
+     "origem_fato": "métrica calculada: endividamento.caixa_anterior"
+    },
+    {
+     "secao": "O QUE MERECE ATENCAO",
+     "trecho": "R$ 26,54 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 26,54 bilhões",
+     "origem_fato": "documento CVM: \"Caixa e Equivalentes de Caixa\" = 26.540.000 (R$ mil)"
+    },
+    {
+     "secao": "O QUE MERECE ATENCAO",
+     "trecho": "R$ 61,83 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 61,83 bilhões",
+     "origem_fato": "métrica calculada: endividamento.divida_liquida_anterior"
+    },
+    {
+     "secao": "O QUE MERECE ATENCAO",
+     "trecho": "R$ 70,77 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "R$ 70,77 bilhões",
+     "origem_fato": "métrica calculada: endividamento.divida_liquida"
+    },
+    {
+     "secao": "O QUE MERECE ATENCAO",
+     "trecho": "R$ 14,47 bilhões",
+     "tipo": "moeda",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "-R$ 14,46 bilhões",
+     "origem_fato": "documento CVM: \"Dividendos e juros sobre capital próprio pagos aos acionistas\" = -14.465.000 (R$ mil)"
+    },
+    {
+     "secao": "O QUE MERECE ATENCAO",
+     "trecho": "34,6%",
+     "tipo": "percentual",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "-34,6%",
+     "origem_fato": "métrica calculada: endividamento.variacao_caixa_pct"
+    },
+    {
+     "secao": "O QUE MERECE ATENCAO",
+     "trecho": "4,0%",
+     "tipo": "percentual",
+     "veredito": "CONFERE",
+     "fato_mais_proximo": "-4,0%",
+     "origem_fato": "métrica calculada: outros_destaques"
+    }
+   ],
+   "resumo": {
+    "total_numeros": 37,
+    "conferem": 37,
+    "divergentes": 0,
+    "nao_encontrados": 0,
+    "taxa_conformidade": 100.0,
+    "escopo": "Verifica valores monetários, percentuais e razões citados no texto, com sinal e direção. Não verifica afirmações qualitativas nem números por extenso."
+   }
+  }
+ },
+ "erro": null,
+ "nome_empresa": "Vale S.A.",
+ "documento": {
+  "periodo": "2026-03-31",
+  "link": "https://www.rad.cvm.gov.br/ENETCONSULTA/frmDownloadDocumento.aspx?CodigoInstituicao=1&NumeroSequencialDocumento=156449"
+ }
+}

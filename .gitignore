@@ -1,0 +1,22 @@
+# Chave de API — nunca versionar
+api_key.txt
+
+# Configuração local do Claude Code — pode conter comandos com segredos
+.claude/settings.local.json
+
+# Arquivos temporários de desenvolvimento
+_*.txt
+
+# Banco vetorial — gerado automaticamente
+chroma_db/
+
+# Cache de documentos da CVM — gerado automaticamente
+dados/cache/
+
+# Cache do Python
+__pycache__/
+*.pyc
+
+# Ambiente virtual
+venv/
+.env

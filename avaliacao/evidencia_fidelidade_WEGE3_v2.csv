@@ -1,0 +1,18 @@
+campo,valor_FundIA,valor_CVM_fonte,confere,fonte_referencia_CSV_CVM,faithfulness_RAGAS
+receita_principal (atual),"R$ 9,47 bilhoes","9.468.313 mil = R$ 9,47 bi",sim,itr_cia_aberta_DRE_con_2026.csv CD_CONTA 3.01 ORDEM=ULTIMO,0.00 (BAIXO - artefato)
+receita_principal (anterior),"R$ 10,08 bilhoes","10.078.571 mil = R$ 10,08 bi",sim,itr_cia_aberta_DRE_con_2026.csv CD_CONTA 3.01 ORDEM=PENULTIMO,-
+receita_principal (variacao),"-6,1%","(9.468.313-10.078.571)/10.078.571 = -6,1%",sim,calc sobre DRE_con CD_CONTA 3.01 (ULTIMO vs PENULTIMO),-
+lucro_liquido (atual),"R$ 1,58 bilhoes","1.579.701 mil = R$ 1,58 bi",sim,itr_cia_aberta_DRE_con_2026.csv CD_CONTA 3.11 ORDEM=ULTIMO,1.00
+lucro_liquido (anterior),"R$ 1,64 bilhoes","1.637.180 mil = R$ 1,64 bi",sim,itr_cia_aberta_DRE_con_2026.csv CD_CONTA 3.11 ORDEM=PENULTIMO,-
+lucro_liquido (variacao),"-3,5%","(1.579.701-1.637.180)/1.637.180 = -3,5%",sim,calc sobre DRE_con CD_CONTA 3.11 (ULTIMO vs PENULTIMO),-
+endividamento.divida_bruta,"R$ 4,09 bilhoes","3.099.649 (2.01.04) + 992.832 (2.02.01) = 4.092.481 mil = R$ 4,09 bi",sim,itr_cia_aberta_BPP_con_2026.csv CD_CONTA 2.01.04 + 2.02.01 ORDEM=ULTIMO,1.00 (pergunta caixa-vs-divida)
+endividamento.caixa_e_equivalentes,"R$ 6,36 bilhoes","6.360.547 mil = R$ 6,36 bi",sim,itr_cia_aberta_BPA_con_2026.csv CD_CONTA 1.01.01 ORDEM=ULTIMO,1.00 (pergunta caixa-vs-divida)
+endividamento.divida_liquida,"R$ -2,27 bilhoes","4.092.481 - 6.360.547 = -2.268.066 mil = R$ -2,27 bi",sim,calc: BPP_con (2.01.04+2.02.01) - BPA_con 1.01.01 ORDEM=ULTIMO,-
+outros: Ativo Total (atual),"R$ 43,38 bilhoes","43.377.646 mil = R$ 43,38 bi",sim,itr_cia_aberta_BPA_con_2026.csv CD_CONTA 1 ORDEM=ULTIMO,-
+outros: Ativo Total (anterior),"R$ 42,65 bilhoes","42.645.030 mil = R$ 42,65 bi",sim,itr_cia_aberta_BPA_con_2026.csv CD_CONTA 1 ORDEM=PENULTIMO,-
+outros: Patrimonio Liquido Consolidado (atual),"R$ 19,08 bilhoes","19.083.629 mil = R$ 19,08 bi",sim,itr_cia_aberta_BPP_con_2026.csv CD_CONTA 2.03 ORDEM=ULTIMO,0.00 (BAIXO - artefato)
+outros: Patrimonio Liquido Consolidado (anterior),"R$ 18,55 bilhoes","18.553.364 mil = R$ 18,55 bi",sim,itr_cia_aberta_BPP_con_2026.csv CD_CONTA 2.03 ORDEM=PENULTIMO,-
+"outros: Aplicacoes Financeiras (circ, -1,2%) [CORRIGIDA: v1 dizia +327,6% por bug de contas homonimas no cache]","R$ 4,20 bilhoes; var -1,2% (cache regenerado pos-correcao)","atual 4.204.784 mil = R$ 4,20 bi; anterior 4.255.539 mil; var (4.204.784-4.255.539)/4.255.539 = -1,2%",sim,itr_cia_aberta_BPA_con_2026.csv CD_CONTA 1.01.01.02 ORDEM=ULTIMO e PENULTIMO,-
+"outros: Emprestimos e Financ. (circ, -12,7%) [CORRIGIDA: v1 dizia +197,6% por bug de contas homonimas no cache]","R$ 3,10 bilhoes; var -12,7% (cache regenerado pos-correcao)","atual 3.099.649 mil = R$ 3,10 bi; anterior 3.549.314 mil; var (3.099.649-3.549.314)/3.549.314 = -12,7%",sim,itr_cia_aberta_BPP_con_2026.csv CD_CONTA 2.01.04 ORDEM=ULTIMO e PENULTIMO,-
+ebitda,nao_disponivel,(conta EBITDA nao existe na DRE estruturada da CVM),sim*,itr_cia_aberta_DRE_con_2026.csv (ausencia verificada em DS_CONTA),-
+margem_liquida (derivada/prompt2),"16,68%","1.579.701/9.468.313 = 16,7%",sim,calc: DRE_con CD_CONTA 3.11 / 3.01 ORDEM=ULTIMO,0.33 (BAIXO - artefato)

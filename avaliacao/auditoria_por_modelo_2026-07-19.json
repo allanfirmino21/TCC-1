@@ -1,0 +1,185 @@
+{
+ "nota_metodologica": "Auditoria aplicada retroativamente às narrativas arquivadas em comparacao_modelos.json (fase pré-determinística: dados extraídos pelo Prompt 1 de cada modelo). Base de fatos: cache atual do documento ITR 2026-03-31 de cada empresa + o próprio JSON de dados do modelo. Amostra de 3 empresas: ilustração do instrumento, não estatística.",
+ "WEGE3_flash": {
+  "resumo": {
+   "total_numeros": 23,
+   "conferem": 19,
+   "divergentes": 3,
+   "nao_encontrados": 1,
+   "taxa_conformidade": 82.6,
+   "escopo": "Verifica valores monetários, percentuais e razões citados no texto, com sinal e direção. Não verifica afirmações qualitativas nem números por extenso."
+  },
+  "problemas": [
+   {
+    "trecho": "R$ 16,68",
+    "secao": "LUCRO",
+    "veredito": "NAO_ENCONTRADO",
+    "motivo": null,
+    "fato_mais_proximo": null
+   },
+   {
+    "trecho": "R$ 2,27 bilhões",
+    "secao": "SAUDE DO CAIXA E DIVIDAS",
+    "veredito": "DIVERGENTE",
+    "motivo": "valor próximo, provável arredondamento incorreto",
+    "fato_mais_proximo": "R$ 2,26 bilhões"
+   },
+   {
+    "trecho": "R$ 2,27 bilhões",
+    "secao": "SAUDE DO CAIXA E DIVIDAS",
+    "veredito": "DIVERGENTE",
+    "motivo": "valor próximo, provável arredondamento incorreto",
+    "fato_mais_proximo": "R$ 2,26 bilhões"
+   },
+   {
+    "trecho": "R$ 2,27 bilhões",
+    "secao": "O QUE FOI POSITIVO",
+    "veredito": "DIVERGENTE",
+    "motivo": "valor próximo, provável arredondamento incorreto",
+    "fato_mais_proximo": "R$ 2,26 bilhões"
+   }
+  ]
+ },
+ "WEGE3_pro": {
+  "resumo": {
+   "total_numeros": 16,
+   "conferem": 14,
+   "divergentes": 1,
+   "nao_encontrados": 1,
+   "taxa_conformidade": 87.5,
+   "escopo": "Verifica valores monetários, percentuais e razões citados no texto, com sinal e direção. Não verifica afirmações qualitativas nem números por extenso."
+  },
+  "problemas": [
+   {
+    "trecho": "R$ 16,70",
+    "secao": "LUCRO",
+    "veredito": "NAO_ENCONTRADO",
+    "motivo": null,
+    "fato_mais_proximo": null
+   },
+   {
+    "trecho": "R$ 2,27 bilhões",
+    "secao": "SAUDE DO CAIXA E DIVIDAS",
+    "veredito": "DIVERGENTE",
+    "motivo": "valor próximo, provável arredondamento incorreto",
+    "fato_mais_proximo": "R$ 2,26 bilhões"
+   }
+  ]
+ },
+ "LWSA3_flash": {
+  "resumo": {
+   "total_numeros": 27,
+   "conferem": 26,
+   "divergentes": 0,
+   "nao_encontrados": 1,
+   "taxa_conformidade": 96.3,
+   "escopo": "Verifica valores monetários, percentuais e razões citados no texto, com sinal e direção. Não verifica afirmações qualitativas nem números por extenso."
+  },
+  "problemas": [
+   {
+    "trecho": "R$ 5,93",
+    "secao": "LUCRO",
+    "veredito": "NAO_ENCONTRADO",
+    "motivo": null,
+    "fato_mais_proximo": null
+   }
+  ]
+ },
+ "LWSA3_pro": {
+  "resumo": {
+   "total_numeros": 20,
+   "conferem": 16,
+   "divergentes": 2,
+   "nao_encontrados": 2,
+   "taxa_conformidade": 80.0,
+   "escopo": "Verifica valores monetários, percentuais e razões citados no texto, com sinal e direção. Não verifica afirmações qualitativas nem números por extenso."
+  },
+  "problemas": [
+   {
+    "trecho": "R$ 5,93",
+    "secao": "LUCRO",
+    "veredito": "NAO_ENCONTRADO",
+    "motivo": null,
+    "fato_mais_proximo": null
+   },
+   {
+    "trecho": "R$ 200 milhões",
+    "secao": "SAUDE DO CAIXA E DIVIDAS",
+    "veredito": "NAO_ENCONTRADO",
+    "motivo": null,
+    "fato_mais_proximo": "-R$ 187,25 milhões"
+   },
+   {
+    "trecho": "3,3%",
+    "secao": "O QUE MERECE ATENCAO",
+    "veredito": "DIVERGENTE",
+    "motivo": "direção do verbo incompatível com o sinal da variação",
+    "fato_mais_proximo": "3,3%"
+   },
+   {
+    "trecho": "5,1%",
+    "secao": "O QUE MERECE ATENCAO",
+    "veredito": "DIVERGENTE",
+    "motivo": "direção do verbo incompatível com o sinal da variação",
+    "fato_mais_proximo": "5,1%"
+   }
+  ]
+ },
+ "LAVV3_flash": {
+  "resumo": {
+   "total_numeros": 24,
+   "conferem": 22,
+   "divergentes": 0,
+   "nao_encontrados": 2,
+   "taxa_conformidade": 91.7,
+   "escopo": "Verifica valores monetários, percentuais e razões citados no texto, com sinal e direção. Não verifica afirmações qualitativas nem números por extenso."
+  },
+  "problemas": [
+   {
+    "trecho": "R$ 22",
+    "secao": "LUCRO",
+    "veredito": "NAO_ENCONTRADO",
+    "motivo": null,
+    "fato_mais_proximo": null
+   },
+   {
+    "trecho": "R$ 1,37 bilhões",
+    "secao": "SAUDE DO CAIXA E DIVIDAS",
+    "veredito": "NAO_ENCONTRADO",
+    "motivo": null,
+    "fato_mais_proximo": "R$ 1,41 bilhões"
+   }
+  ]
+ },
+ "LAVV3_pro": {
+  "resumo": {
+   "total_numeros": 21,
+   "conferem": 20,
+   "divergentes": 0,
+   "nao_encontrados": 1,
+   "taxa_conformidade": 95.2,
+   "escopo": "Verifica valores monetários, percentuais e razões citados no texto, com sinal e direção. Não verifica afirmações qualitativas nem números por extenso."
+  },
+  "problemas": [
+   {
+    "trecho": "R$ 22",
+    "secao": "LUCRO",
+    "veredito": "NAO_ENCONTRADO",
+    "motivo": null,
+    "fato_mais_proximo": null
+   }
+  ]
+ },
+ "agregado": {
+  "flash": {
+   "conferem": 67,
+   "total": 74,
+   "taxa": 90.5
+  },
+  "pro": {
+   "conferem": 50,
+   "total": 57,
+   "taxa": 87.7
+  }
+ }
+}

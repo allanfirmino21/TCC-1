@@ -1,0 +1,356 @@
+{
+  "WEGE3": {
+    "flash": {
+      "modelo": "gemini-2.5-flash",
+      "rotulo": "flash",
+      "periodo": "2026-03-31",
+      "gerado_em": "2026-06-15T00:35:59.884971+00:00",
+      "sucesso": true,
+      "erro": null,
+      "dados_extraidos": {
+        "periodo_referencia": "nao_disponivel",
+        "base_dados": "Consolidado",
+        "escala_original": "R$ milhares (mil reais)",
+        "receita_principal": {
+          "descricao": "Receita de Venda de Bens e/ou Serviços",
+          "valor_atual": "R$ 9,47 bilhoes",
+          "valor_anterior": "R$ 10,08 bilhoes",
+          "variacao_pct": "-6,1%"
+        },
+        "lucro_liquido": {
+          "valor_atual": "R$ 1,58 bilhoes",
+          "valor_anterior": "R$ 1,64 bilhoes",
+          "variacao_pct": "-3,5%"
+        },
+        "ebitda": {
+          "valor_atual": "nao_disponivel",
+          "margem_pct": "nao_disponivel",
+          "nota": "Nao consta no relatorio estruturado da CVM — comum em ITRs"
+        },
+        "endividamento": {
+          "divida_bruta": "R$ 4,09 bilhoes",
+          "caixa_e_equivalentes": "R$ 6,36 bilhoes",
+          "divida_liquida": "R$ -2,27 bilhoes",
+          "nota": "empresa tem mais caixa do que divida"
+        },
+        "outros_destaques": [
+          "Ativo Total atual: R$ 43,38 bilhoes",
+          "Patrimônio Líquido Consolidado atual: R$ 19,08 bilhoes",
+          "Aplicações Financeiras no ativo circulante aumentaram +327,6% para R$ 4,20 bilhoes",
+          "Empréstimos e Financiamentos no passivo circulante aumentaram +197,6% para R$ 3,10 bilhoes"
+        ],
+        "dados_ausentes": [
+          "periodo_referencia",
+          "ebitda"
+        ],
+        "advertencias": [
+          "A linha 'Aplicações Financeiras' aparece duas vezes no Ativo Circulante com valores diferentes (4.204.784 e 1.025.221). Foi utilizado o valor de 4.204.784, que compõe o total de 'Caixa e Equivalentes de Caixa'.",
+          "As sub-linhas 'Outros' sob 'Outras Obrigações' no Passivo Circulante e Não Circulante apresentam o mesmo valor da linha principal, o que pode indicar um erro de formatação na fonte dos dados.",
+          "A linha 'Ajustes Acumulados de Conversão' no Patrimônio Líquido apresenta valores inconsistentes para o período atual (0 e 1.519.463)."
+        ]
+      },
+      "narrativa_completa": "Aqui está a análise dos resultados da WEG S.A. para um investidor iniciante:\n\n### RESUMO\nA WEG S.A. apresentou um resultado mais fraco no trimestre encerrado em 31 de março de 2026, com o lucro caindo 3,5% para R$ 1,58 bilhão. A receita principal da empresa também registrou uma queda neste período. O principal ponto de atenção é a diminuição tanto do faturamento quanto do lucro.\n\n### O QUE A EMPRESA FATURA\nA WEG S.A. vende bens e/ou presta serviços. Neste período, a empresa faturou R$ 9,47 bilhões com essas atividades. Esse valor representa uma queda de 6,1% em comparação com o período anterior, mostrando uma diminuição nas vendas de seus produtos e serviços, que são a base do seu negócio.\n\n### LUCRO\nO lucro da empresa neste período foi de R$ 1,58 bilhão, o que representa uma queda de 3,5% em relação ao período anterior. Isso significa que, a cada R$ 100 que a WEG S.A. faturou, sobraram R$ 16,68 de lucro. A queda no lucro foi influenciada por uma diminuição no resultado das operações da empresa e por um aumento nos impostos sobre o lucro.\n\n### SAÚDE DO CAIXA E DÍVIDAS\nA WEG S.A. tem uma situação financeira confortável, com mais dinheiro em caixa do que dívidas. A dívida líquida é negativa em R$ 2,27 bilhões, o que significa que a empresa tem R$ 2,27 bilhões a mais em caixa e equivalentes do que em dívidas brutas. No entanto, os empréstimos e financiamentos de curto prazo (dívidas que precisam ser pagas em até um ano) aumentaram 197,6% para R$ 3,10 bilhões, o que merece atenção.\n\n### O QUE FOI POSITIVO\n- A empresa possui mais dinheiro em caixa do que dívidas, com uma dívida líquida negativa de R$ 2,27 bilhões.\n- As aplicações financeiras de curto prazo (investimentos que podem ser convertidos em dinheiro rapidamente) cresceram 327,6%, atingindo R$ 4,20 bilhões.\n- As receitas com juros aumentaram de R$ 40,716 milhões para R$ 47,906 milhões.\n- As despesas gerais e administrativas caíram de R$ 5,110 milhões para R$ 2,408 milhões.\n\n### O QUE MERECE ATENÇÃO\n- A receita principal da empresa caiu 6,1% neste período.\n- O lucro líquido registrou uma queda de 3,5%.\n- Os empréstimos e financiamentos de curto prazo aumentaram significativamente em 197,6%.\n- As despesas com juros cresceram de R$ 34,652 milhões para R$ 42,940 milhões.\n\n### LIMITAÇÕES DESTA ANÁLISE\nEsta análise não pode responder sobre o período exato de comparação, pois essa informação não estava disponível nos dados estruturados. Também não foi possível analisar o EBITDA (lucro antes de descontar juros, impostos e depreciação), que é um indicador importante da performance operacional. Além disso, não tínhamos os valores anteriores para a dívida bruta e o caixa e equivalentes, o que limita a avaliação da tendência desses itens. Foram identificadas algumas inconsistências nos dados, como valores duplicados ou com formatação incomum em certas linhas do balanço. Esta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo.",
+      "secoes": {
+        "RESUMO": "A WEG S.A. apresentou um resultado mais fraco no trimestre encerrado em 31 de março de 2026, com o lucro caindo 3,5% para R$ 1,58 bilhão. A receita principal da empresa também registrou uma queda neste período. O principal ponto de atenção é a diminuição tanto do faturamento quanto do lucro.",
+        "O QUE A EMPRESA FATURA": "A WEG S.A. vende bens e/ou presta serviços. Neste período, a empresa faturou R$ 9,47 bilhões com essas atividades. Esse valor representa uma queda de 6,1% em comparação com o período anterior, mostrando uma diminuição nas vendas de seus produtos e serviços, que são a base do seu negócio.",
+        "LUCRO": "O lucro da empresa neste período foi de R$ 1,58 bilhão, o que representa uma queda de 3,5% em relação ao período anterior. Isso significa que, a cada R$ 100 que a WEG S.A. faturou, sobraram R$ 16,68 de lucro. A queda no lucro foi influenciada por uma diminuição no resultado das operações da empresa e por um aumento nos impostos sobre o lucro.",
+        "SAUDE DO CAIXA E DIVIDAS": "A WEG S.A. tem uma situação financeira confortável, com mais dinheiro em caixa do que dívidas. A dívida líquida é negativa em R$ 2,27 bilhões, o que significa que a empresa tem R$ 2,27 bilhões a mais em caixa e equivalentes do que em dívidas brutas. No entanto, os empréstimos e financiamentos de curto prazo (dívidas que precisam ser pagas em até um ano) aumentaram 197,6% para R$ 3,10 bilhões, o que merece atenção.",
+        "O QUE FOI POSITIVO": "- A empresa possui mais dinheiro em caixa do que dívidas, com uma dívida líquida negativa de R$ 2,27 bilhões.\n- As aplicações financeiras de curto prazo (investimentos que podem ser convertidos em dinheiro rapidamente) cresceram 327,6%, atingindo R$ 4,20 bilhões.\n- As receitas com juros aumentaram de R$ 40,716 milhões para R$ 47,906 milhões.\n- As despesas gerais e administrativas caíram de R$ 5,110 milhões para R$ 2,408 milhões.",
+        "O QUE MERECE ATENCAO": "- A receita principal da empresa caiu 6,1% neste período.\n- O lucro líquido registrou uma queda de 3,5%.\n- Os empréstimos e financiamentos de curto prazo aumentaram significativamente em 197,6%.\n- As despesas com juros cresceram de R$ 34,652 milhões para R$ 42,940 milhões.",
+        "LIMITACOES DESTA ANALISE": "Esta análise não pode responder sobre o período exato de comparação, pois essa informação não estava disponível nos dados estruturados. Também não foi possível analisar o EBITDA (lucro antes de descontar juros, impostos e depreciação), que é um indicador importante da performance operacional. Além disso, não tínhamos os valores anteriores para a dívida bruta e o caixa e equivalentes, o que limita a avaliação da tendência desses itens. Foram identificadas algumas inconsistências nos dados, como valores duplicados ou com formatação incomum em certas linhas do balanço. Esta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo."
+      }
+    },
+    "pro": {
+      "modelo": "gemini-2.5-pro",
+      "rotulo": "pro",
+      "periodo": "2026-03-31",
+      "gerado_em": "2026-06-15T00:36:53.879528+00:00",
+      "sucesso": true,
+      "erro": null,
+      "dados_extraidos": {
+        "periodo_referencia": "nao_disponivel",
+        "base_dados": "Consolidado",
+        "escala_original": "R$ milhares (mil reais)",
+        "receita_principal": {
+          "descricao": "Receita de Venda de Bens e/ou Serviços",
+          "valor_atual": "R$ 9,47 bilhoes",
+          "valor_anterior": "R$ 10,08 bilhoes",
+          "variacao_pct": "-6,1%"
+        },
+        "lucro_liquido": {
+          "valor_atual": "R$ 1,58 bilhao",
+          "valor_anterior": "R$ 1,64 bilhao",
+          "variacao_pct": "-3,5%"
+        },
+        "ebitda": {
+          "valor_atual": "nao_disponivel",
+          "margem_pct": "nao_disponivel",
+          "nota": "Nao consta no relatorio estruturado da CVM — comum em ITRs"
+        },
+        "endividamento": {
+          "divida_bruta": "R$ 4,09 bilhoes",
+          "caixa_e_equivalentes": "R$ 6,36 bilhoes",
+          "divida_liquida": "R$ -2,27 bilhoes",
+          "nota": "empresa tem mais caixa do que divida"
+        },
+        "outros_destaques": [
+          "O Ativo Total consolidado atingiu R$ 43,38 bilhoes, ante R$ 42,65 bilhoes no período anterior.",
+          "O Patrimônio Líquido Consolidado foi de R$ 19,08 bilhoes, ante R$ 18,55 bilhoes no período anterior."
+        ],
+        "dados_ausentes": [
+          "periodo_referencia",
+          "ebitda",
+          "margem_ebitda_pct"
+        ],
+        "advertencias": [
+          "A conta 'Aplicações Financeiras' aparece listada mais de uma vez no Ativo Circulante, o que pode indicar um erro de formatação na fonte dos dados."
+        ]
+      },
+      "narrativa_completa": "Com certeza. Aqui está a análise dos resultados da WEG S.A., seguindo todas as suas regras e formato.\n\n### RESUMO\nA WEG S.A. apresentou um resultado mais fraco no primeiro trimestre de 2026 em comparação com o mesmo período do ano anterior, com queda tanto no faturamento quanto no lucro. O principal número que resume o período é o lucro líquido de R$ 1,58 bilhão, uma queda de 3,5%. Apesar da redução nos resultados, o que mais chama a atenção é a excelente saúde financeira da empresa, que tem mais dinheiro em caixa do que dívidas.\n\n### O QUE A EMPRESA FATURA\nA receita da WEG vem da \"Venda de Bens e/ou Serviços\". Neste trimestre, a empresa faturou R$ 9,47 bilhões. Esse valor representa uma queda de 6,1% em comparação com o mesmo período do ano anterior. O faturamento é o total de dinheiro que a empresa gera com suas vendas, antes de descontar custos e despesas, e serve como o ponto de partida para avaliar o desempenho do negócio.\n\n### LUCRO\nA WEG teve um lucro líquido de R$ 1,58 bilhão no período. O resultado representa uma queda de 3,5% em relação ao mesmo trimestre do ano anterior. Para contextualizar, isso significa que a cada R$ 100 que a empresa faturou, sobraram aproximadamente R$ 16,70 de lucro. A principal causa para a queda no lucro, segundo os dados, foi a redução no faturamento da companhia.\n\n### SAÚDE DO CAIXA E DÍVIDAS\nA empresa tem uma situação de caixa muito confortável. Ela possui R$ 6,36 bilhões em caixa e aplicações financeiras, enquanto suas dívidas somam R$ 4,09 bilhões. Na prática, isso significa que a WEG tem mais dinheiro guardado do que dívidas a pagar. Se decidisse quitar todas as suas obrigações hoje, ainda sobrariam R$ 2,27 bilhões em caixa. Os dados não permitem comparar a evolução da dívida com o período anterior.\n\n### O QUE FOI POSITIVO\n- A empresa terminou o período com mais dinheiro em caixa (R$ 6,36 bilhões) do que o total de suas dívidas (R$ 4,09 bilhões).\n- O total de bens e direitos da companhia, chamado de Ativo Total, cresceu, atingindo R$ 43,38 bilhões.\n- A riqueza líquida dos sócios, conhecida como Patrimônio Líquido, também aumentou, chegando a R$ 19,08 bilhões.\n\n### O QUE MERECE ATENÇÃO\n- A receita de vendas teve uma queda de 6,1%, o que significa que a empresa vendeu menos neste trimestre.\n- O lucro líquido caiu 3,5%, mostrando uma menor rentabilidade em comparação com o mesmo período do ano anterior.\n- As despesas com juros e outras obrigações financeiras foram maiores neste período, o que também impactou o resultado final.\n\n### LIMITAÇÕES DESTA ANÁLISE\nEsta análise não consegue explicar os motivos específicos para a queda nas vendas, pois os dados não detalham o desempenho por linha de produto ou região. Também não foi possível avaliar a eficiência operacional da empresa, pois faltam dados como o EBITDA (lucro antes de juros, impostos, depreciação e amortização). Os dados ausentes no relatório estruturado foram: `periodo_referencia`, `ebitda` e `margem_ebitda_pct`.\n\nEsta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo.",
+      "secoes": {
+        "RESUMO": "A WEG S.A. apresentou um resultado mais fraco no primeiro trimestre de 2026 em comparação com o mesmo período do ano anterior, com queda tanto no faturamento quanto no lucro. O principal número que resume o período é o lucro líquido de R$ 1,58 bilhão, uma queda de 3,5%. Apesar da redução nos resultados, o que mais chama a atenção é a excelente saúde financeira da empresa, que tem mais dinheiro em caixa do que dívidas.",
+        "O QUE A EMPRESA FATURA": "A receita da WEG vem da \"Venda de Bens e/ou Serviços\". Neste trimestre, a empresa faturou R$ 9,47 bilhões. Esse valor representa uma queda de 6,1% em comparação com o mesmo período do ano anterior. O faturamento é o total de dinheiro que a empresa gera com suas vendas, antes de descontar custos e despesas, e serve como o ponto de partida para avaliar o desempenho do negócio.",
+        "LUCRO": "A WEG teve um lucro líquido de R$ 1,58 bilhão no período. O resultado representa uma queda de 3,5% em relação ao mesmo trimestre do ano anterior. Para contextualizar, isso significa que a cada R$ 100 que a empresa faturou, sobraram aproximadamente R$ 16,70 de lucro. A principal causa para a queda no lucro, segundo os dados, foi a redução no faturamento da companhia.",
+        "SAUDE DO CAIXA E DIVIDAS": "A empresa tem uma situação de caixa muito confortável. Ela possui R$ 6,36 bilhões em caixa e aplicações financeiras, enquanto suas dívidas somam R$ 4,09 bilhões. Na prática, isso significa que a WEG tem mais dinheiro guardado do que dívidas a pagar. Se decidisse quitar todas as suas obrigações hoje, ainda sobrariam R$ 2,27 bilhões em caixa. Os dados não permitem comparar a evolução da dívida com o período anterior.",
+        "O QUE FOI POSITIVO": "- A empresa terminou o período com mais dinheiro em caixa (R$ 6,36 bilhões) do que o total de suas dívidas (R$ 4,09 bilhões).\n- O total de bens e direitos da companhia, chamado de Ativo Total, cresceu, atingindo R$ 43,38 bilhões.\n- A riqueza líquida dos sócios, conhecida como Patrimônio Líquido, também aumentou, chegando a R$ 19,08 bilhões.",
+        "O QUE MERECE ATENCAO": "- A receita de vendas teve uma queda de 6,1%, o que significa que a empresa vendeu menos neste trimestre.\n- O lucro líquido caiu 3,5%, mostrando uma menor rentabilidade em comparação com o mesmo período do ano anterior.\n- As despesas com juros e outras obrigações financeiras foram maiores neste período, o que também impactou o resultado final.",
+        "LIMITACOES DESTA ANALISE": "Esta análise não consegue explicar os motivos específicos para a queda nas vendas, pois os dados não detalham o desempenho por linha de produto ou região. Também não foi possível avaliar a eficiência operacional da empresa, pois faltam dados como o EBITDA (lucro antes de juros, impostos, depreciação e amortização). Os dados ausentes no relatório estruturado foram: `periodo_referencia`, `ebitda` e `margem_ebitda_pct`.\n\nEsta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo."
+      }
+    }
+  },
+  "LWSA3": {
+    "flash": {
+      "modelo": "gemini-2.5-flash",
+      "rotulo": "flash",
+      "periodo": "2026-03-31",
+      "gerado_em": "2026-06-15T00:37:51.807252+00:00",
+      "sucesso": true,
+      "erro": null,
+      "dados_extraidos": {
+        "periodo_referencia": "nao_disponivel",
+        "base_dados": "Consolidado",
+        "escala_original": "R$ milhares (mil reais)",
+        "receita_principal": {
+          "descricao": "Receita de Venda de Bens e/ou Serviços",
+          "valor_atual": "R$ 362,78 milhoes",
+          "valor_anterior": "R$ 348,89 milhoes",
+          "variacao_pct": "+4,0%"
+        },
+        "lucro_liquido": {
+          "valor_atual": "R$ 21,52 milhoes",
+          "valor_anterior": "R$ 14,81 milhoes",
+          "variacao_pct": "+45,3%"
+        },
+        "ebitda": {
+          "valor_atual": "nao_disponivel",
+          "margem_pct": "nao_disponivel",
+          "nota": "Nao consta no relatorio estruturado da CVM — comum em ITRs"
+        },
+        "endividamento": {
+          "divida_bruta": "R$ 71,20 milhoes",
+          "caixa_e_equivalentes": "R$ 288,60 milhoes",
+          "divida_liquida": "R$ -217,40 milhoes",
+          "nota": "empresa tem mais caixa do que divida"
+        },
+        "outros_destaques": [
+          "Patrimônio Líquido Consolidado de R$ 2,34 bilhoes, uma redução de -5,1% em relação ao período anterior.",
+          "Ativos Intangíveis de R$ 1,85 bilhoes representam 80,9% do Ativo Não Circulante."
+        ],
+        "dados_ausentes": [
+          "periodo_referencia",
+          "ebitda"
+        ],
+        "advertencias": [
+          "As linhas 'Aplicações Financeiras Avaliadas a Valor Justo através do Resultado', 'Contas a Receber', 'Clientes' e 'Fornecedores' (Passivo Circulante) apresentam valor zero no período anterior, o que pode indicar reclassificações ou mudanças na apresentação contábil.",
+          "A linha 'Outras Obrigações' no Passivo Circulante teve um aumento expressivo de 1985,7%, passando de R$ 48,66 milhoes para R$ 1,01 bilhoes, o que requer análise detalhada.",
+          "A linha 'Ações em Tesouraria' aparece com valor negativo de R$ 75,64 milhoes no período atual e zero no anterior, indicando aquisição de ações próprias.",
+          "O 'Ajustes de Avaliação Patrimonial' passou de positivo (R$ 0,04 milhoes) para negativo (R$ -1,93 milhoes)."
+        ]
+      },
+      "narrativa_completa": "Olá! Vamos entender juntos o que aconteceu com a LWSA S/A neste último período, sem complicação.\n\n### RESUMO\nA LWSA S/A apresentou um bom desempenho no trimestre encerrado em 31 de março de 2026, com seu lucro líquido crescendo significativamente. A empresa registrou um lucro líquido de R$ 21,52 milhões, um aumento de 45,3% em relação ao período anterior. No entanto, é importante observar a queda no Patrimônio Líquido e um aumento expressivo em \"Outras Obrigações\" no Passivo Circulante.\n\n### O QUE A EMPRESA FATURA\nA LWSA S/A gera sua receita principalmente através da \"Receita de Venda de Bens e/ou Serviços\". Neste período, a empresa faturou R$ 362,78 milhões. Esse valor representa um crescimento de 4,0% em comparação com o período anterior, quando o faturamento foi de R$ 348,89 milhões. Essa receita é o dinheiro que a empresa recebe por suas atividades principais, como a venda de produtos ou a prestação de serviços.\n\n### LUCRO\nA empresa registrou um lucro líquido de R$ 21,52 milhões neste período. Esse resultado é 45,3% maior do que o lucro de R$ 14,81 milhões obtido no período anterior. Para contextualizar, a cada R$ 100 que a empresa faturou, sobrou R$ 5,93 de lucro. O aumento do lucro indica uma melhora na rentabilidade da empresa.\n\n### SAÚDE DO CAIXA E DÍVIDAS\nA LWSA S/A tem uma posição financeira confortável em relação às suas dívidas. A empresa possui R$ 288,60 milhões em caixa e equivalentes de caixa, enquanto sua dívida bruta é de R$ 71,20 milhões. Isso significa que a empresa tem mais dinheiro guardado do que dívidas, resultando em uma dívida líquida negativa de R$ -217,40 milhões. Na prática, isso indica que a empresa tem recursos suficientes para cobrir suas obrigações e ainda tem capital disponível. Não foi possível identificar se a dívida cresceu ou diminuiu em relação ao período anterior com os dados disponíveis.\n\n### O QUE FOI POSITIVO\n- O lucro líquido cresceu 45,3%, atingindo R$ 21,52 milhões.\n- A receita de venda de bens e/ou serviços aumentou 4,0%, chegando a R$ 362,78 milhões.\n- A empresa possui mais dinheiro em caixa (R$ 288,60 milhões) do que dívidas (R$ 71,20 milhões), com uma dívida líquida negativa de R$ -217,40 milhões.\n\n### O QUE MERECE ATENÇÃO\n- O Patrimônio Líquido (o valor que sobra para os donos da empresa depois de pagar todas as dívidas) Consolidado teve uma redução de -5,1%, passando para R$ 2,34 bilhões.\n- A linha \"Outras Obrigações\" no Passivo Circulante (dívidas e obrigações que a empresa precisa pagar no curto prazo) teve um aumento expressivo de 1985,7%, saltando de R$ 48,66 milhões para R$ 1,01 bilhão. Isso requer uma análise mais detalhada para entender a natureza dessas obrigações.\n- O Ativo Total (tudo o que a empresa possui, como dinheiro, bens e direitos) da empresa caiu de R$ 3,64 bilhões para R$ 3,52 bilhões.\n- O Caixa e Equivalentes de Caixa (dinheiro disponível e investimentos de curtíssimo prazo) diminuiu de R$ 371,93 milhões para R$ 288,60 milhões.\n\n### LIMITAÇÕES DESTA ANÁLISE\nEsta análise não pode informar o período de referência exato do relatório (se é um trimestre, semestre, etc.), pois essa informação não estava disponível nos dados estruturados. Também não foi possível analisar o EBITDA (lucro antes de descontar juros, impostos e depreciação), pois esse dado não constava no relatório estruturado. As linhas \"Aplicações Financeiras Avaliadas a Valor Justo através do Resultado\", \"Contas a Receber\", \"Clientes\" e \"Fornecedores\" (Passivo Circulante) apresentaram valor zero no período anterior, o que pode indicar reclassificações ou mudanças na apresentação contábil e não foi possível aprofundar. Além disso, a linha \"Ações em Tesouraria\" aparece com valor negativo de R$ 75,64 milhões no período atual e zero no anterior, indicando aquisição de ações próprias, e o \"Ajustes de Avaliação Patrimonial\" passou de positivo para negativo, o que também não foi possível detalhar as causas. Esta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo.",
+      "secoes": {
+        "RESUMO": "A LWSA S/A apresentou um bom desempenho no trimestre encerrado em 31 de março de 2026, com seu lucro líquido crescendo significativamente. A empresa registrou um lucro líquido de R$ 21,52 milhões, um aumento de 45,3% em relação ao período anterior. No entanto, é importante observar a queda no Patrimônio Líquido e um aumento expressivo em \"Outras Obrigações\" no Passivo Circulante.",
+        "O QUE A EMPRESA FATURA": "A LWSA S/A gera sua receita principalmente através da \"Receita de Venda de Bens e/ou Serviços\". Neste período, a empresa faturou R$ 362,78 milhões. Esse valor representa um crescimento de 4,0% em comparação com o período anterior, quando o faturamento foi de R$ 348,89 milhões. Essa receita é o dinheiro que a empresa recebe por suas atividades principais, como a venda de produtos ou a prestação de serviços.",
+        "LUCRO": "A empresa registrou um lucro líquido de R$ 21,52 milhões neste período. Esse resultado é 45,3% maior do que o lucro de R$ 14,81 milhões obtido no período anterior. Para contextualizar, a cada R$ 100 que a empresa faturou, sobrou R$ 5,93 de lucro. O aumento do lucro indica uma melhora na rentabilidade da empresa.",
+        "SAUDE DO CAIXA E DIVIDAS": "A LWSA S/A tem uma posição financeira confortável em relação às suas dívidas. A empresa possui R$ 288,60 milhões em caixa e equivalentes de caixa, enquanto sua dívida bruta é de R$ 71,20 milhões. Isso significa que a empresa tem mais dinheiro guardado do que dívidas, resultando em uma dívida líquida negativa de R$ -217,40 milhões. Na prática, isso indica que a empresa tem recursos suficientes para cobrir suas obrigações e ainda tem capital disponível. Não foi possível identificar se a dívida cresceu ou diminuiu em relação ao período anterior com os dados disponíveis.",
+        "O QUE FOI POSITIVO": "- O lucro líquido cresceu 45,3%, atingindo R$ 21,52 milhões.\n- A receita de venda de bens e/ou serviços aumentou 4,0%, chegando a R$ 362,78 milhões.\n- A empresa possui mais dinheiro em caixa (R$ 288,60 milhões) do que dívidas (R$ 71,20 milhões), com uma dívida líquida negativa de R$ -217,40 milhões.",
+        "O QUE MERECE ATENCAO": "- O Patrimônio Líquido (o valor que sobra para os donos da empresa depois de pagar todas as dívidas) Consolidado teve uma redução de -5,1%, passando para R$ 2,34 bilhões.\n- A linha \"Outras Obrigações\" no Passivo Circulante (dívidas e obrigações que a empresa precisa pagar no curto prazo) teve um aumento expressivo de 1985,7%, saltando de R$ 48,66 milhões para R$ 1,01 bilhão. Isso requer uma análise mais detalhada para entender a natureza dessas obrigações.\n- O Ativo Total (tudo o que a empresa possui, como dinheiro, bens e direitos) da empresa caiu de R$ 3,64 bilhões para R$ 3,52 bilhões.\n- O Caixa e Equivalentes de Caixa (dinheiro disponível e investimentos de curtíssimo prazo) diminuiu de R$ 371,93 milhões para R$ 288,60 milhões.",
+        "LIMITACOES DESTA ANALISE": "Esta análise não pode informar o período de referência exato do relatório (se é um trimestre, semestre, etc.), pois essa informação não estava disponível nos dados estruturados. Também não foi possível analisar o EBITDA (lucro antes de descontar juros, impostos e depreciação), pois esse dado não constava no relatório estruturado. As linhas \"Aplicações Financeiras Avaliadas a Valor Justo através do Resultado\", \"Contas a Receber\", \"Clientes\" e \"Fornecedores\" (Passivo Circulante) apresentaram valor zero no período anterior, o que pode indicar reclassificações ou mudanças na apresentação contábil e não foi possível aprofundar. Além disso, a linha \"Ações em Tesouraria\" aparece com valor negativo de R$ 75,64 milhões no período atual e zero no anterior, indicando aquisição de ações próprias, e o \"Ajustes de Avaliação Patrimonial\" passou de positivo para negativo, o que também não foi possível detalhar as causas. Esta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo."
+      }
+    },
+    "pro": {
+      "modelo": "gemini-2.5-pro",
+      "rotulo": "pro",
+      "periodo": "2026-03-31",
+      "gerado_em": "2026-06-15T00:38:40.565765+00:00",
+      "sucesso": true,
+      "erro": null,
+      "dados_extraidos": {
+        "periodo_referencia": "nao_disponivel",
+        "base_dados": "Consolidado",
+        "escala_original": "R$ milhares (mil reais)",
+        "receita_principal": {
+          "descricao": "Receita de Venda de Bens e/ou Serviços",
+          "valor_atual": "R$ 362,78 milhoes",
+          "valor_anterior": "R$ 348,89 milhoes",
+          "variacao_pct": "+4,0%"
+        },
+        "lucro_liquido": {
+          "valor_atual": "R$ 21,52 milhoes",
+          "valor_anterior": "R$ 14,81 milhoes",
+          "variacao_pct": "+45,3%"
+        },
+        "ebitda": {
+          "valor_atual": "nao_disponivel",
+          "margem_pct": "nao_disponivel",
+          "nota": "Nao consta no relatorio estruturado da CVM — comum em ITRs"
+        },
+        "endividamento": {
+          "divida_bruta": "R$ 71,20 milhoes",
+          "caixa_e_equivalentes": "R$ 288,60 milhoes",
+          "divida_liquida": "R$ -217,40 milhoes",
+          "nota": "empresa tem mais caixa do que divida"
+        },
+        "outros_destaques": [
+          "O Resultado Bruto foi de R$ 175,53 milhoes, um aumento de 8,0% em relação aos R$ 162,49 milhoes do período anterior.",
+          "O Ativo Total da companhia reduziu 3,3% para R$ 3,52 bilhoes.",
+          "O Patrimônio Líquido Consolidado foi de R$ 2,34 bilhoes, uma queda de 5,1% em comparação com o período anterior."
+        ],
+        "dados_ausentes": [
+          "periodo_referencia",
+          "EBITDA (valor_atual)",
+          "EBITDA (margem_pct)"
+        ],
+        "advertencias": [
+          "As linhas 'Empréstimos e Financiamentos' e 'Fornecedores' no passivo apresentam valor anterior zerado, enquanto suas sub-linhas possuem valores, indicando uma possível reclassificação contábil entre os períodos."
+        ]
+      },
+      "narrativa_completa": "Com certeza! Aqui está a análise dos resultados da LWSA S/A, seguindo todas as suas regras e formato.\n\n---\n\n### RESUMO\nA LWSA S/A (LWSA3) apresentou um resultado positivo no primeiro trimestre de 2026, com crescimento no faturamento e um forte aumento no lucro. O principal destaque foi o lucro líquido, que atingiu R$ 21,52 milhões, um salto de 45,3% em comparação com o mesmo período do ano anterior. A empresa também mostrou uma situação financeira confortável, com muito mais dinheiro em caixa do que dívidas. Apesar do bom resultado, a redução no total de bens e direitos da empresa é um ponto que merece atenção.\n\n### O QUE A EMPRESA FATURA\nA empresa fatura com a \"Venda de Bens e/ou Serviços\", conforme descrito no relatório. Neste trimestre, o faturamento total foi de R$ 362,78 milhões. Este valor representa um crescimento de 4,0% em relação ao mesmo período do ano anterior. Esse número mostra o total de dinheiro que entrou na empresa pela sua atividade principal, antes de descontar qualquer custo ou despesa.\n\n### LUCRO\nA empresa registrou um lucro líquido de R$ 21,52 milhões no período. O resultado representa um forte crescimento de 45,3% em comparação com o trimestre anterior. Na prática, isso significa que a cada R$ 100 que a empresa faturou, sobraram R$ 5,93 de lucro líquido. O aumento do lucro foi impulsionado, em parte, por um crescimento de 8,0% no resultado bruto (o lucro antes de despesas operacionais, com vendas e administrativas), que subiu mais que o próprio faturamento.\n\n### SAÚDE DO CAIXA E DÍVIDAS\nA empresa possui uma situação de caixa muito confortável. Ela tem R$ 288,60 milhões em caixa e equivalentes, enquanto sua dívida bruta (o total de empréstimos e financiamentos) é de R$ 71,20 milhões. Isso significa que a LWSA tem mais dinheiro guardado do que dívidas a pagar. Na prática, a empresa poderia quitar todas as suas obrigações financeiras e ainda sobrariam mais de R$ 200 milhões em caixa, o que dá segurança para operar e investir.\n\n### O QUE FOI POSITIVO\n- O lucro líquido teve um salto de 45,3%, atingindo R$ 21,52 milhões.\n- A empresa tem mais dinheiro em caixa (R$ 288,60 milhões) do que dívidas (R$ 71,20 milhões), uma posição financeira sólida.\n- O faturamento cresceu 4,0%, mostrando que a empresa continua a expandir suas vendas.\n- O resultado bruto cresceu 8,0%, um ritmo mais forte que o do faturamento, indicando uma melhora na eficiência.\n\n### O QUE MERECE ATENÇÃO\n- O total de ativos da companhia (soma de todos os seus bens e direitos, como caixa, imóveis e contas a receber) reduziu 3,3% no período.\n- O patrimônio líquido (recursos dos acionistas investidos na empresa) apresentou uma queda de 5,1%, chegando a R$ 2,34 bilhões.\n\n### LIMITAÇÕES DESTA ANÁLISE\nEsta análise não detalha a origem específica do faturamento, pois o relatório apenas o classifica como \"Venda de Bens e/ou Serviços\". Não foi possível avaliar a geração de caixa operacional da empresa através de métricas como o EBITDA (lucro antes de juros, impostos, depreciação e amortização), pois este dado não estava disponível no relatório estruturado. O documento também não informa explicitamente qual o período anterior usado para comparação.\n\nEsta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo.",
+      "secoes": {
+        "RESUMO": "A LWSA S/A (LWSA3) apresentou um resultado positivo no primeiro trimestre de 2026, com crescimento no faturamento e um forte aumento no lucro. O principal destaque foi o lucro líquido, que atingiu R$ 21,52 milhões, um salto de 45,3% em comparação com o mesmo período do ano anterior. A empresa também mostrou uma situação financeira confortável, com muito mais dinheiro em caixa do que dívidas. Apesar do bom resultado, a redução no total de bens e direitos da empresa é um ponto que merece atenção.",
+        "O QUE A EMPRESA FATURA": "A empresa fatura com a \"Venda de Bens e/ou Serviços\", conforme descrito no relatório. Neste trimestre, o faturamento total foi de R$ 362,78 milhões. Este valor representa um crescimento de 4,0% em relação ao mesmo período do ano anterior. Esse número mostra o total de dinheiro que entrou na empresa pela sua atividade principal, antes de descontar qualquer custo ou despesa.",
+        "LUCRO": "A empresa registrou um lucro líquido de R$ 21,52 milhões no período. O resultado representa um forte crescimento de 45,3% em comparação com o trimestre anterior. Na prática, isso significa que a cada R$ 100 que a empresa faturou, sobraram R$ 5,93 de lucro líquido. O aumento do lucro foi impulsionado, em parte, por um crescimento de 8,0% no resultado bruto (o lucro antes de despesas operacionais, com vendas e administrativas), que subiu mais que o próprio faturamento.",
+        "SAUDE DO CAIXA E DIVIDAS": "A empresa possui uma situação de caixa muito confortável. Ela tem R$ 288,60 milhões em caixa e equivalentes, enquanto sua dívida bruta (o total de empréstimos e financiamentos) é de R$ 71,20 milhões. Isso significa que a LWSA tem mais dinheiro guardado do que dívidas a pagar. Na prática, a empresa poderia quitar todas as suas obrigações financeiras e ainda sobrariam mais de R$ 200 milhões em caixa, o que dá segurança para operar e investir.",
+        "O QUE FOI POSITIVO": "- O lucro líquido teve um salto de 45,3%, atingindo R$ 21,52 milhões.\n- A empresa tem mais dinheiro em caixa (R$ 288,60 milhões) do que dívidas (R$ 71,20 milhões), uma posição financeira sólida.\n- O faturamento cresceu 4,0%, mostrando que a empresa continua a expandir suas vendas.\n- O resultado bruto cresceu 8,0%, um ritmo mais forte que o do faturamento, indicando uma melhora na eficiência.",
+        "O QUE MERECE ATENCAO": "- O total de ativos da companhia (soma de todos os seus bens e direitos, como caixa, imóveis e contas a receber) reduziu 3,3% no período.\n- O patrimônio líquido (recursos dos acionistas investidos na empresa) apresentou uma queda de 5,1%, chegando a R$ 2,34 bilhões.",
+        "LIMITACOES DESTA ANALISE": "Esta análise não detalha a origem específica do faturamento, pois o relatório apenas o classifica como \"Venda de Bens e/ou Serviços\". Não foi possível avaliar a geração de caixa operacional da empresa através de métricas como o EBITDA (lucro antes de juros, impostos, depreciação e amortização), pois este dado não estava disponível no relatório estruturado. O documento também não informa explicitamente qual o período anterior usado para comparação.\n\nEsta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo."
+      }
+    }
+  },
+  "LAVV3": {
+    "flash": {
+      "modelo": "gemini-2.5-flash",
+      "rotulo": "flash",
+      "periodo": "2026-03-31",
+      "gerado_em": "2026-06-15T00:39:46.261997+00:00",
+      "sucesso": true,
+      "erro": null,
+      "dados_extraidos": {
+        "periodo_referencia": "nao_disponivel",
+        "base_dados": "Consolidado",
+        "escala_original": "R$ milhares (mil reais)",
+        "receita_principal": {
+          "descricao": "Receita de Venda de Bens e/ou Serviços",
+          "valor_atual": "372,96 milhoes",
+          "valor_anterior": "334,63 milhoes",
+          "variacao_pct": "+11,5%"
+        },
+        "lucro_liquido": {
+          "valor_atual": "82,07 milhoes",
+          "valor_anterior": "96,35 milhoes",
+          "variacao_pct": "-14,8%"
+        },
+        "ebitda": {
+          "valor_atual": "nao_disponivel",
+          "margem_pct": "nao_disponivel",
+          "nota": "Nao consta no relatorio estruturado da CVM — comum em ITRs"
+        },
+        "endividamento": {
+          "divida_bruta": "1,37 bilhoes",
+          "caixa_e_equivalentes": "196,18 milhoes",
+          "divida_liquida": "1,18 bilhoes",
+          "nota": "nao_disponivel"
+        },
+        "outros_destaques": [
+          "Ativo Total: 4,64 bilhoes",
+          "Patrimônio Líquido Consolidado: 1,62 bilhoes",
+          "Resultado Bruto: 119,05 milhoes",
+          "Resultado Antes do Resultado Financeiro e dos Tributos: 71,66 milhoes"
+        ],
+        "dados_ausentes": [
+          "EBITDA"
+        ],
+        "advertencias": [
+          "A linha 'Caixa e Equivalentes de Caixa' aparece duas vezes no Balanço Patrimonial - Ativo (Consolidado) com valores ligeiramente diferentes (196.180 e 191.250). Foi utilizado o primeiro valor como o total."
+        ]
+      },
+      "narrativa_completa": "### RESUMO\nA LAVVI EMPREENDIMENTOS IMOBILIÁRIOS S.A. (LAVV3) apresentou resultados mistos no trimestre encerrado em 31 de março de 2026. A empresa conseguiu aumentar sua receita principal em 11,5%, atingindo R$ 372,96 milhões. No entanto, o lucro líquido caiu 14,8%, ficando em R$ 82,07 milhões. A queda do lucro, apesar do crescimento da receita, é o ponto que mais merece atenção neste período.\n\n### O QUE A EMPRESA FATURA\nA LAVVI EMPREENDIMENTOS IMOBILIÁRIOS S.A. atua no setor imobiliário, gerando receita principalmente pela venda de bens e/ou serviços relacionados a seus empreendimentos. Neste período, a empresa faturou R$ 372,96 milhões com suas vendas. Esse valor representa um crescimento de 11,5% em comparação com o período anterior, quando a receita foi de R$ 334,63 milhões. Essa receita é o dinheiro que a empresa gera diretamente de suas atividades principais, como a venda de imóveis.\n\n### LUCRO\nA empresa lucrou R$ 82,07 milhões neste período. Esse resultado representa uma queda de 14,8% em relação ao período anterior, quando o lucro foi de R$ 96,35 milhões. Para contextualizar, a cada R$ 100 que a empresa faturou, sobrou aproximadamente R$ 22 de lucro. Os dados disponíveis não detalham as causas exatas da queda do lucro, mas indicam que, apesar do aumento da receita, os custos e despesas podem ter crescido proporcionalmente mais ou outros fatores impactaram o resultado final.\n\n### SAÚDE DO CAIXA E DÍVIDAS\nA LAVVI possui uma dívida bruta de R$ 1,37 bilhões e um caixa (dinheiro guardado) de R$ 196,18 milhões. Isso resulta em uma dívida líquida (que é a dívida total da empresa menos o dinheiro que ela tem em caixa) de R$ 1,18 bilhões. Os dados não permitem comparar a dívida com o período anterior. Na prática, isso significa que a empresa tem um volume considerável de dívidas em relação ao seu dinheiro disponível, e precisaria de mais de um bilhão de reais para quitar suas obrigações financeiras se usasse todo o seu caixa.\n\n### O QUE FOI POSITIVO\n- A receita de venda de bens e/ou serviços cresceu 11,5%, atingindo R$ 372,96 milhões, mostrando expansão nas atividades principais da empresa.\n- O ativo total (o conjunto de bens e direitos da empresa) é robusto, somando R$ 4,64 bilhões.\n- O patrimônio líquido (o valor que sobra para os donos após pagar todas as dívidas) é de R$ 1,62 bilhões, indicando uma base sólida de capital próprio.\n\n### O QUE MERECE ATENÇÃO\n- O lucro líquido caiu 14,8%, passando de R$ 96,35 milhões para R$ 82,07 milhões, o que indica uma redução na rentabilidade, mesmo com o aumento da receita.\n- A empresa possui uma dívida líquida de R$ 1,18 bilhões, que é um valor alto em comparação com o caixa disponível de R$ 196,18 milhões.\n- Não há dados do período anterior para comparar a evolução da dívida, o que impede uma análise sobre se a situação de endividamento melhorou ou piorou.\n\n### LIMITAÇÕES DESTA ANÁLISE\n- Não foi possível identificar o período de referência exato (data de início) para a comparação dos resultados, apenas a data final do trimestre (31 de março de 2026).\n- Os dados de EBITDA (lucro antes de descontar juros, impostos e depreciação) não estavam disponíveis, o que impede uma análise mais completa da eficiência operacional da empresa.\n- Não há dados do período anterior para a dívida, impossibilitando a avaliação da sua evolução.\n- Houve uma pequena divergência nos valores de \"Caixa e Equivalentes de Caixa\" no relatório, sendo utilizado o valor de R$ 196,18 milhões para esta análise.\nEsta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo.",
+      "secoes": {
+        "RESUMO": "A LAVVI EMPREENDIMENTOS IMOBILIÁRIOS S.A. (LAVV3) apresentou resultados mistos no trimestre encerrado em 31 de março de 2026. A empresa conseguiu aumentar sua receita principal em 11,5%, atingindo R$ 372,96 milhões. No entanto, o lucro líquido caiu 14,8%, ficando em R$ 82,07 milhões. A queda do lucro, apesar do crescimento da receita, é o ponto que mais merece atenção neste período.",
+        "O QUE A EMPRESA FATURA": "A LAVVI EMPREENDIMENTOS IMOBILIÁRIOS S.A. atua no setor imobiliário, gerando receita principalmente pela venda de bens e/ou serviços relacionados a seus empreendimentos. Neste período, a empresa faturou R$ 372,96 milhões com suas vendas. Esse valor representa um crescimento de 11,5% em comparação com o período anterior, quando a receita foi de R$ 334,63 milhões. Essa receita é o dinheiro que a empresa gera diretamente de suas atividades principais, como a venda de imóveis.",
+        "LUCRO": "A empresa lucrou R$ 82,07 milhões neste período. Esse resultado representa uma queda de 14,8% em relação ao período anterior, quando o lucro foi de R$ 96,35 milhões. Para contextualizar, a cada R$ 100 que a empresa faturou, sobrou aproximadamente R$ 22 de lucro. Os dados disponíveis não detalham as causas exatas da queda do lucro, mas indicam que, apesar do aumento da receita, os custos e despesas podem ter crescido proporcionalmente mais ou outros fatores impactaram o resultado final.",
+        "SAUDE DO CAIXA E DIVIDAS": "A LAVVI possui uma dívida bruta de R$ 1,37 bilhões e um caixa (dinheiro guardado) de R$ 196,18 milhões. Isso resulta em uma dívida líquida (que é a dívida total da empresa menos o dinheiro que ela tem em caixa) de R$ 1,18 bilhões. Os dados não permitem comparar a dívida com o período anterior. Na prática, isso significa que a empresa tem um volume considerável de dívidas em relação ao seu dinheiro disponível, e precisaria de mais de um bilhão de reais para quitar suas obrigações financeiras se usasse todo o seu caixa.",
+        "O QUE FOI POSITIVO": "- A receita de venda de bens e/ou serviços cresceu 11,5%, atingindo R$ 372,96 milhões, mostrando expansão nas atividades principais da empresa.\n- O ativo total (o conjunto de bens e direitos da empresa) é robusto, somando R$ 4,64 bilhões.\n- O patrimônio líquido (o valor que sobra para os donos após pagar todas as dívidas) é de R$ 1,62 bilhões, indicando uma base sólida de capital próprio.",
+        "O QUE MERECE ATENCAO": "- O lucro líquido caiu 14,8%, passando de R$ 96,35 milhões para R$ 82,07 milhões, o que indica uma redução na rentabilidade, mesmo com o aumento da receita.\n- A empresa possui uma dívida líquida de R$ 1,18 bilhões, que é um valor alto em comparação com o caixa disponível de R$ 196,18 milhões.\n- Não há dados do período anterior para comparar a evolução da dívida, o que impede uma análise sobre se a situação de endividamento melhorou ou piorou.",
+        "LIMITACOES DESTA ANALISE": "- Não foi possível identificar o período de referência exato (data de início) para a comparação dos resultados, apenas a data final do trimestre (31 de março de 2026).\n- Os dados de EBITDA (lucro antes de descontar juros, impostos e depreciação) não estavam disponíveis, o que impede uma análise mais completa da eficiência operacional da empresa.\n- Não há dados do período anterior para a dívida, impossibilitando a avaliação da sua evolução.\n- Houve uma pequena divergência nos valores de \"Caixa e Equivalentes de Caixa\" no relatório, sendo utilizado o valor de R$ 196,18 milhões para esta análise.\nEsta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo."
+      }
+    },
+    "pro": {
+      "modelo": "gemini-2.5-pro",
+      "rotulo": "pro",
+      "periodo": "2026-03-31",
+      "gerado_em": "2026-06-15T00:40:41.458252+00:00",
+      "sucesso": true,
+      "erro": null,
+      "dados_extraidos": {
+        "periodo_referencia": "nao_disponivel",
+        "base_dados": "Consolidado",
+        "escala_original": "R$ milhares (mil reais)",
+        "receita_principal": {
+          "descricao": "Receita de Venda de Bens e/ou Serviços",
+          "valor_atual": "R$ 373,0 milhoes",
+          "valor_anterior": "R$ 334,6 milhoes",
+          "variacao_pct": "+11,5%"
+        },
+        "lucro_liquido": {
+          "valor_atual": "R$ 82,1 milhoes",
+          "valor_anterior": "R$ 96,4 milhoes",
+          "variacao_pct": "-14,8%"
+        },
+        "ebitda": {
+          "valor_atual": "nao_disponivel",
+          "margem_pct": "nao_disponivel",
+          "nota": "Nao consta no relatorio estruturado da CVM — comum em ITRs"
+        },
+        "endividamento": {
+          "divida_bruta": "R$ 1,37 bilhoes",
+          "caixa_e_equivalentes": "R$ 196,2 milhoes",
+          "divida_liquida": "R$ 1,18 bilhoes",
+          "nota": "nao_disponivel"
+        },
+        "outros_destaques": [
+          "O saldo de Estoques (imóveis a comercializar) no ativo circulante aumentou de R$ 423,4 milhões para R$ 1,95 bilhão."
+        ],
+        "dados_ausentes": [
+          "periodo_referencia",
+          "EBITDA",
+          "Margem EBITDA"
+        ],
+        "advertencias": [
+          "A conta 'Caixa e Equivalentes de Caixa' aparece duplicada no Balanço Patrimonial (Ativo); foi utilizado o valor que representa a soma das subcontas.",
+          "A Dívida Bruta foi calculada somando as linhas de 'Empréstimos e Financiamentos' do passivo circulante e não circulante."
+        ]
+      },
+      "narrativa_completa": "Com certeza! Aqui está a análise dos resultados da LAVVI, seguindo todas as suas regras e o formato solicitado.\n\n### RESUMO\nA LAVVI Empreendimentos Imobiliários apresentou um resultado misto no primeiro trimestre de 2026. Apesar de a empresa ter faturado mais, o lucro final foi menor em comparação com o mesmo período do ano anterior. O lucro líquido caiu 14,8%, totalizando R$ 82,1 milhões. O principal ponto de atenção é entender por que o lucro diminuiu mesmo com o aumento das vendas, o que parece estar ligado ao crescimento das despesas.\n\n### O QUE A EMPRESA FATURA\nA LAVVI atua no setor imobiliário, ou seja, sua principal atividade é a construção e venda de imóveis. Neste trimestre, a empresa faturou R$ 373,0 milhões com suas vendas. Esse valor representa um crescimento de 11,5% em comparação com o mesmo período do ano anterior, indicando que a companhia vendeu mais.\n\n### LUCRO\nO lucro da LAVVI foi de R$ 82,1 milhões no período. O resultado caiu 14,8% em relação ao trimestre anterior. Em termos práticos, isso significa que a cada R$ 100 que a empresa faturou com a venda de imóveis, sobraram cerca de R$ 22 como lucro final. A queda no lucro, mesmo com o aumento do faturamento, pode ser explicada em parte pelo aumento das despesas com juros, que passaram de R$ 14,5 milhões para R$ 26,3 milhões no período.\n\n### SAÚDE DO CAIXA E DÍVIDAS\nA empresa encerrou o trimestre com mais dívidas do que dinheiro em caixa. A dívida total era de R$ 1,37 bilhão, enquanto o dinheiro disponível em caixa somava R$ 196,2 milhões. Não há dados para comparar a evolução da dívida com o período anterior. Na prática, isso mostra que a companhia utiliza capital de terceiros para financiar suas operações e projetos.\n\n### O QUE FOI POSITIVO\n- O faturamento com a venda de imóveis cresceu 11,5%, atingindo R$ 373,0 milhões.\n- Apesar da queda, a empresa registrou um lucro de R$ 82,1 milhões no trimestre.\n- As receitas geradas por aplicações financeiras aumentaram, passando de R$ 13,1 milhões para R$ 17,5 milhões.\n\n### O QUE MERECE ATENÇÃO\n- O lucro líquido caiu 14,8%, mesmo com o aumento do faturamento.\n- As despesas com juros de dívidas aumentaram de forma significativa, passando de R$ 14,5 milhões para R$ 26,3 milhões.\n- O estoque de imóveis prontos para venda aumentou drasticamente, saltando de R$ 423,4 milhões para R$ 1,95 bilhão.\n\n### LIMITAÇÕES DESTA ANÁLISE\nEsta análise não consegue detalhar a qualidade da dívida ou a velocidade de venda dos imóveis em estoque, pois esses dados não estão disponíveis. Também não foi possível avaliar a geração de caixa operacional da empresa, pois faltam informações como o EBITDA (lucro antes de juros, impostos, depreciação e amortização). Os dados ausentes no relatório estruturado foram: periodo_referencia, EBITDA e Margem EBITDA.\n\nEsta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo.",
+      "secoes": {
+        "RESUMO": "A LAVVI Empreendimentos Imobiliários apresentou um resultado misto no primeiro trimestre de 2026. Apesar de a empresa ter faturado mais, o lucro final foi menor em comparação com o mesmo período do ano anterior. O lucro líquido caiu 14,8%, totalizando R$ 82,1 milhões. O principal ponto de atenção é entender por que o lucro diminuiu mesmo com o aumento das vendas, o que parece estar ligado ao crescimento das despesas.",
+        "O QUE A EMPRESA FATURA": "A LAVVI atua no setor imobiliário, ou seja, sua principal atividade é a construção e venda de imóveis. Neste trimestre, a empresa faturou R$ 373,0 milhões com suas vendas. Esse valor representa um crescimento de 11,5% em comparação com o mesmo período do ano anterior, indicando que a companhia vendeu mais.",
+        "LUCRO": "O lucro da LAVVI foi de R$ 82,1 milhões no período. O resultado caiu 14,8% em relação ao trimestre anterior. Em termos práticos, isso significa que a cada R$ 100 que a empresa faturou com a venda de imóveis, sobraram cerca de R$ 22 como lucro final. A queda no lucro, mesmo com o aumento do faturamento, pode ser explicada em parte pelo aumento das despesas com juros, que passaram de R$ 14,5 milhões para R$ 26,3 milhões no período.",
+        "SAUDE DO CAIXA E DIVIDAS": "A empresa encerrou o trimestre com mais dívidas do que dinheiro em caixa. A dívida total era de R$ 1,37 bilhão, enquanto o dinheiro disponível em caixa somava R$ 196,2 milhões. Não há dados para comparar a evolução da dívida com o período anterior. Na prática, isso mostra que a companhia utiliza capital de terceiros para financiar suas operações e projetos.",
+        "O QUE FOI POSITIVO": "- O faturamento com a venda de imóveis cresceu 11,5%, atingindo R$ 373,0 milhões.\n- Apesar da queda, a empresa registrou um lucro de R$ 82,1 milhões no trimestre.\n- As receitas geradas por aplicações financeiras aumentaram, passando de R$ 13,1 milhões para R$ 17,5 milhões.",
+        "O QUE MERECE ATENCAO": "- O lucro líquido caiu 14,8%, mesmo com o aumento do faturamento.\n- As despesas com juros de dívidas aumentaram de forma significativa, passando de R$ 14,5 milhões para R$ 26,3 milhões.\n- O estoque de imóveis prontos para venda aumentou drasticamente, saltando de R$ 423,4 milhões para R$ 1,95 bilhão.",
+        "LIMITACOES DESTA ANALISE": "Esta análise não consegue detalhar a qualidade da dívida ou a velocidade de venda dos imóveis em estoque, pois esses dados não estão disponíveis. Também não foi possível avaliar a geração de caixa operacional da empresa, pois faltam informações como o EBITDA (lucro antes de juros, impostos, depreciação e amortização). Os dados ausentes no relatório estruturado foram: periodo_referencia, EBITDA e Margem EBITDA.\n\nEsta análise é baseada nos dados estruturados do relatório da CVM e não substitui a leitura do documento completo."
+      }
+    }
+  }
+}

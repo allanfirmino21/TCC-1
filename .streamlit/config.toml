@@ -1,0 +1,12 @@
+[server]
+# Desabilita o file-watcher que inspeciona modulos PyTorch e gera
+# o RuntimeError "torch.classes" no console. Para recarregar apos
+# mudancas no codigo: Ctrl+C e execute streamlit run app.py novamente.
+fileWatcherType = "none"
+
+[logger]
+# Suprime logs internos do Streamlit (mantém apenas erros reais)
+level = "error"
+
+[client]
+showErrorDetails = false

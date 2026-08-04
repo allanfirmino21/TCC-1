@@ -1,0 +1,24 @@
+# fundIA — dependências diretas
+# Python 3.12
+
+# Interface web (API REST consumida pelo frontend React em frontend/)
+fastapi==0.136.3
+uvicorn==0.46.0
+
+# Interface legada (app.py) — pode ser removida se o Streamlit não for mais usado
+streamlit==1.44.1
+
+# Pipeline principal
+google-genai==2.2.0
+chromadb==1.5.9
+sentence-transformers==5.5.0
+pandas==2.2.3
+requests==2.32.3
+pdfplumber==0.11.9
+reportlab==4.5.1
+
+# Avaliação (avaliacao/rodar_ragas.py) — versões conforme notas de
+# compatibilidade no cabeçalho do script; não instaladas no ambiente atual
+ragas==0.4.3
+langchain-community~=0.4.0
+langchain-google-genai>=2.0

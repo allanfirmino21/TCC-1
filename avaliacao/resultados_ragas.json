@@ -1,0 +1,128 @@
+{
+  "scores_medios": {
+    "faithfulness": 0.4375,
+    "answer_relevancy": 0.8064
+  },
+  "resultados": [
+    {
+      "ticker": "WEGE3",
+      "question": "Qual foi a receita líquida da WEG no último trimestre reportado?",
+      "answer": "Com base exclusivamente nos trechos fornecidos, a receita líquida (Receita de Venda de Bens e/ou Serviços) da WEG no último período reportado foi de **9.468.313**.",
+      "ground_truth": "R$ 9.468.313 mil (aproximadamente R$ 9,47 bilhões), queda de 6,1% em relação aos R$ 10.078.571 mil do período anterior.",
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.9604717294109936
+    },
+    {
+      "ticker": "WEGE3",
+      "question": "Qual foi o lucro líquido consolidado da WEG?",
+      "answer": "Com base EXCLUSIVAMENTE nos trechos fornecidos, o lucro líquido consolidado do período foi de **1.579.701**.",
+      "ground_truth": "R$ 1.579.701 mil (aproximadamente R$ 1,58 bilhão), queda de 3,5% em relação aos R$ 1.637.180 mil do período anterior.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8083781242446393
+    },
+    {
+      "ticker": "WEGE3",
+      "question": "Qual é a margem líquida da WEG?",
+      "answer": "A margem líquida da WEG é calculada dividindo o Lucro/Prejuízo Consolidado do Período pela Receita de Venda de Bens e/ou Serviços (Receita Líquida).\n\nCom base nos trechos fornecidos:\n*   **Lucro/Prejuízo Consolidado do Período:** 1.579.701 (Trecho 2)\n*   **Receita de Venda de Bens e/ou Serviços:** 9.468.313 (Trecho 2)\n\nCálculo:\nMargem Líquida = (1.579.701 / 9.468.313) * 100%\nMargem Líquida = 0,166849... * 100%\n**Margem Líquida = 16,68%**",
+      "ground_truth": "Aproximadamente 16,7% — lucro líquido de R$ 1.579.701 mil sobre receita de R$ 9.468.313 mil.",
+      "faithfulness": 0.3333333333333333,
+      "answer_relevancy": 0.9483144114195312
+    },
+    {
+      "ticker": "WEGE3",
+      "question": "A WEG tem mais caixa ou mais dívidas?",
+      "answer": "Com base exclusivamente nos trechos fornecidos:\n\n*   **Caixa e Equivalentes de Caixa:** 6.360.547\n*   **Empréstimos e Financiamentos (Passivo Circulante):** 3.099.649\n*   **Empréstimos e Financiamentos (Passivo Não Circulante):** 992.832\n*   **Total de Dívidas (Empréstimos e Financiamentos):** 3.099.649 + 992.832 = 4.092.481\n\nA WEG tem mais caixa (6.360.547) do que dívidas (4.092.481).",
+      "ground_truth": "A WEG tem mais caixa do que dívidas. Caixa e equivalentes: R$ 6.360.547 mil. Dívida bruta total (circulante R$ 3.099.649 mil + não circulante R$ 992.832 mil) = R$ 4.092.481 mil. Dívida líquida negativa de aproximadamente R$ 2,27 bilhões.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8710259252600419
+    },
+    {
+      "ticker": "WEGE3",
+      "question": "Qual é o patrimônio líquido consolidado da WEG?",
+      "answer": "Com base EXCLUSIVAMENTE nos trechos fornecidos, o patrimônio líquido consolidado é de **19.083.629**.",
+      "ground_truth": "R$ 19.083.629 mil (aproximadamente R$ 19,08 bilhões), crescimento em relação aos R$ 18.553.364 mil do período anterior.",
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.8198932507228743
+    },
+    {
+      "ticker": "LWSA3",
+      "question": "Qual foi a receita líquida da Locaweb no último trimestre?",
+      "answer": "Com base exclusivamente nos trechos fornecidos:\n\nA receita líquida da Locaweb no último trimestre foi de **362.780**.",
+      "ground_truth": "R$ 362.780 mil (aproximadamente R$ 362,8 milhões), crescimento de 4,0% em relação aos R$ 348.890 mil do período anterior.",
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.8203718543073322
+    },
+    {
+      "ticker": "LWSA3",
+      "question": "Qual foi o lucro líquido da Locaweb?",
+      "answer": "Com base exclusivamente nos trechos fornecidos, o lucro líquido da Locaweb foi de **21.515**.",
+      "ground_truth": "R$ 21.515 mil (aproximadamente R$ 21,5 milhões), crescimento de 45,3% em relação aos R$ 14.808 mil do período anterior.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9574288704063578
+    },
+    {
+      "ticker": "LWSA3",
+      "question": "Qual é a margem líquida da Locaweb?",
+      "answer": "Para calcular a margem líquida, utilizamos a fórmula:\n\nMargem Líquida = (Lucro Líquido / Receita Líquida) * 100%\n\nCom base no [Trecho 3] (Demonstração de Resultado):\n\n*   **Receita Líquida** (Receita de Venda de Bens e/ou Serviços) = 362.780\n*   **Lucro Líquido** (Lucro/Prejuízo Consolidado do Período) = 21.515\n\nCálculo:\nMargem Líquida = (21.515 / 362.780) * 100%\nMargem Líquida = 0,0593097... * 100%\nMargem Líquida = 5,93%\n\nA margem líquida da Locaweb é de aproximadamente **5,93%**.",
+      "ground_truth": "Aproximadamente 5,9% — lucro líquido de R$ 21.515 mil sobre receita de R$ 362.780 mil.",
+      "faithfulness": 0.3,
+      "answer_relevancy": 0.8736010848603367
+    },
+    {
+      "ticker": "LWSA3",
+      "question": "Como está a posição de caixa e dívida da Locaweb?",
+      "answer": "Com base exclusivamente nos trechos fornecidos:\n\n**Posição de Caixa e Dívida da Locaweb:**\n\n1.  **Caixa e Equivalentes de Caixa:** Diminuiu",
+      "ground_truth": "Caixa e equivalentes: R$ 288.599 mil. Empréstimos e financiamentos não circulantes (arrendamento): R$ 52.423 mil. A empresa tem dívida líquida negativa — mais caixa do que dívidas totais.",
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.4407852879523062
+    },
+    {
+      "ticker": "LWSA3",
+      "question": "O resultado operacional da Locaweb melhorou ou piorou?",
+      "answer": "Com base EXCLUSIVAMENTE nos trechos fornecidos:\n\nO resultado operacional da Locaweb melhorou. O \"Resultado Antes do Resultado Financeiro e dos Tributos\" (que representa o resultado operacional) passou de 31.948 no período anterior para 49.731 no período atual.",
+      "ground_truth": "Melhorou significativamente. EBIT (Resultado Antes do Resultado Financeiro e dos Tributos) foi de R$ 49.731 mil, crescimento de 55,7% em relação aos R$ 31.948 mil do período anterior.",
+      "faithfulness": 0.3333333333333333,
+      "answer_relevancy": 0.7887177372271758
+    },
+    {
+      "ticker": "LAVV3",
+      "question": "Qual foi a receita da Lavvi no último trimestre?",
+      "answer": "Com base exclusivamente nos trechos fornecidos:\n\nA Receita de Venda de Bens e/ou Serviços (equivalente à Receita Líquida) mais recente apresentada é de **372.958**.\n\nNo entanto, os trechos **não especificam o período** a que essa receita",
+      "ground_truth": "R$ 372.958 mil (aproximadamente R$ 373 milhões), crescimento de 11,5% em relação aos R$ 334.630 mil do período anterior.",
+      "faithfulness": 0.5,
+      "answer_relevancy": 0.0
+    },
+    {
+      "ticker": "LAVV3",
+      "question": "Qual foi o lucro líquido da Lavvi?",
+      "answer": "Com base EXCLUSIVAMENTE nos trechos fornecidos, o lucro líquido da Lavvi foi de **82.073**.",
+      "ground_truth": "R$ 82.073 mil (aproximadamente R$ 82,1 milhões), queda de 14,8% em relação aos R$ 96.354 mil do período anterior.",
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.9826148295349796
+    },
+    {
+      "ticker": "LAVV3",
+      "question": "Por que o lucro da Lavvi caiu mesmo com a receita crescendo?",
+      "answer": "Com base exclusivamente nos trechos fornecidos, o lucro da Lavvi caiu mesmo com a receita crescendo devido a:\n\n1.  **Aumento desproporcional do Custo dos Bens",
+      "ground_truth": "As despesas financeiras saltaram de R$ 17.145 mil para R$ 28.475 mil (+66%), e o custo dos bens e serviços vendidos cresceu de R$ 209.067 mil para R$ 253.913 mil (+21,4%), comprimindo a margem apesar do crescimento da receita.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9999999999999721
+    },
+    {
+      "ticker": "LAVV3",
+      "question": "Qual é a situação de endividamento da Lavvi?",
+      "answer": "Com base exclusivamente nos trechos fornecidos, a situação de endividamento da Lavvi apresenta as seguintes características:\n\n1.  **Aumento Significativo da Dívida Bruta:**",
+      "ground_truth": "Empréstimos e financiamentos circulantes somados a não circulantes são consideráveis. O patrimônio líquido consolidado caiu de R$ 1.780.796 mil para R$ 1.624.061 mil (queda de 8,8%). A empresa carrega dívida líquida positiva — mais dívidas que caixa (caixa de R$ 196.180 mil contra dívidas significativamente maiores).",
+      "faithfulness": 0.6666666666666666,
+      "answer_relevancy": 0.896339805364568
+    },
+    {
+      "ticker": "LAVV3",
+      "question": "Qual é a margem líquida da Lavvi?",
+      "answer": "Com base exclusivamente nos trechos fornecidos:\n\n*   **Receita Líquida (Receita de Venda de Bens e/ou Serviços):** 372.958\n*   **Resultado Líquido (Lucro/Prejuízo Consolidado do Período):** 82.073\n\n**Cálculo da Margem Líquida:**\n(Resultado Líquido / Receita Líquida) * 100\n(82.073 / 372.958) * 100 = 22,01%\n\nA margem líquida da Lavvi é de **22,01%**.",
+      "ground_truth": "Aproximadamente 22% — lucro líquido de R$ 82.073 mil sobre receita de R$ 372.958 mil.",
+      "faithfulness": 0.42857142857142855,
+      "answer_relevancy": 0.9287408128721895
+    }
+  ]
+}

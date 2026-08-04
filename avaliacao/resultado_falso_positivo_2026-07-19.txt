@@ -1,0 +1,39 @@
+==========================================================================
+TESTE DE FALSO-POSITIVO DO AUDITOR - varredura de sementes
+==========================================================================
+Base de fatos fixa: 282 linhas de valores (documentos reais: ~280-300) -> 576 fatos de moeda, 6 percentuais curados, 282 variacoes derivaveis.
+Varredura: sementes 0..19, 20 percentuais e 20 moedas aleatorios (fora da base) por semente.
+
+[Controle] numeros legitimos com CONFERE: 9/9 (esperado 9/9) - OK
+
+ semente |  FP percentuais |  FP moedas
+------------------------------------------
+       0 |               0 |          8
+       1 |               0 |          8
+       2 |               0 |          6
+       3 |               0 |          6
+       4 |               0 |          4
+       5 |               0 |          7
+       6 |               0 |          9
+       7 |               0 |          7
+       8 |               0 |         12
+       9 |               0 |          5
+      10 |               0 |          3
+      11 |               0 |          2
+      12 |               0 |          3
+      13 |               0 |          4
+      14 |               0 |          6
+      15 |               0 |          8
+      16 |               0 |          5
+      17 |               0 |          7
+      18 |               0 |          9
+      19 |               0 |          4
+------------------------------------------
+
+RESULTADO - falso-positivo (CONFERE indevido):
+  Percentuais: media 0.00/20 por semente (min 0, max 0) - total 0/400 = 0.0%
+  Moedas:      media 6.15/20 por semente (min 2, max 12) - total 123/400 = 30.8%
+
+Destino dos numeros aleatorios que nao passaram:
+  Percentuais: 90 DIVERGENTE, 310 NAO_ENCONTRADO
+  Moedas:      196 DIVERGENTE, 81 NAO_ENCONTRADO
