@@ -5,15 +5,10 @@ import contextlib
 
 import streamlit as st
 
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.units import cm
-from reportlab.lib.enums import TA_CENTER
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
-
 sys.path.insert(0, ".")
 
 from modulos.orquestrador import analisar
+from modulos.relatorio_pdf import gerar_pdf
 
 # ── Configuração global da página ─────────────────────────────────────────────
 st.set_page_config(
@@ -62,77 +57,6 @@ def _md(texto: str) -> str:
     o texto fica colado e ilegível (ex: 'R32,76bilhõesneste...').
     """
     return texto.replace("$", r"\$")
-
-
-def _escape_pdf(texto: str) -> str:
-    """
-    Prepara texto para os Paragraph do reportlab: escapa caracteres XML
-    e converte quebras de linha em <br/>.
-    """
-    txt = (texto.replace("&", "&amp;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;"))
-    return txt.replace("\n", "<br/>")
-
-
-def _gerar_pdf(empresa: str, ticker: str, periodo: str,
-               tipo_doc: str, secoes: dict) -> bytes:
-    """
-    Gera o PDF da análise em memória (sem salvar em disco) e retorna os bytes.
-
-    Estrutura:
-      • Título: nome da empresa + ticker
-      • Subtítulo: tipo de relatório + período
-      • As 7 seções da narrativa, cada uma com o título em negrito.
-        Seções sem conteúdo são puladas.
-
-    Os emojis dos títulos são omitidos — as fontes padrão do reportlab
-    não os renderizam; usa-se apenas o texto amigável de SECOES.
-    """
-    buffer = io.BytesIO()
-    doc = SimpleDocTemplate(
-        buffer, pagesize=A4,
-        topMargin=2 * cm, bottomMargin=2 * cm,
-        leftMargin=2 * cm, rightMargin=2 * cm,
-        title=f"fundIA — {ticker}",
-    )
-
-    estilos = getSampleStyleSheet()
-    estilo_titulo = ParagraphStyle(
-        "TituloEmpresa", parent=estilos["Title"],
-        fontSize=18, leading=22, alignment=TA_CENTER, spaceAfter=4,
-    )
-    estilo_subtitulo = ParagraphStyle(
-        "Subtitulo", parent=estilos["Normal"],
-        fontSize=10, leading=13, alignment=TA_CENTER,
-        textColor="#666666", spaceAfter=18,
-    )
-    estilo_secao = ParagraphStyle(
-        "TituloSecao", parent=estilos["Heading2"],
-        fontSize=13, leading=16, spaceBefore=12, spaceAfter=6,
-    )
-    estilo_corpo = ParagraphStyle(
-        "Corpo", parent=estilos["Normal"],
-        fontSize=10.5, leading=15, spaceAfter=6,
-    )
-
-    elementos = [
-        Paragraph(f"{_escape_pdf(empresa)} ({_escape_pdf(ticker)})", estilo_titulo),
-        Paragraph(f"Relatório {_escape_pdf(tipo_doc)} · Período {_escape_pdf(periodo)}",
-                  estilo_subtitulo),
-    ]
-
-    # Itera na ordem definida em SECOES, pulando seções vazias.
-    for chave, (_icone, titulo) in SECOES.items():
-        texto = (secoes.get(chave) or "").strip()
-        if not texto:
-            continue
-        elementos.append(Paragraph(_escape_pdf(titulo), estilo_secao))
-        elementos.append(Paragraph(_escape_pdf(texto), estilo_corpo))
-        elementos.append(Spacer(1, 4))
-
-    doc.build(elementos)
-    return buffer.getvalue()
 
 
 # ── Pipeline com progresso visual ─────────────────────────────────────────────
@@ -370,7 +294,7 @@ if "resultado" in st.session_state:
     st.divider()
 
     # ── Download ──────────────────────────────────────────────────────────────
-    pdf_bytes = _gerar_pdf(empresa, ticker, periodo, r["tipo_documento"], secoes)
+    pdf_bytes = gerar_pdf(empresa, ticker, periodo, r["tipo_documento"], secoes)
     nome_arquivo = f"fundia_{ticker}_{periodo}.pdf"
     st.download_button(
         label     = "⬇️  Baixar análise completa (.pdf)",

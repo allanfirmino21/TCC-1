@@ -1,120 +1,246 @@
-# fundIA — Análise Fundamentalista com IA
+# fundIA
 
-Lê os documentos financeiros de uma empresa listada na B3 e gera uma análise fundamentalista estruturada em linguagem natural.
+Sistema de análise fundamentalista automatizada de companhias abertas
+brasileiras. A partir de um código de negociação da B3, obtém o documento
+contábil mais recente entregue à Comissão de Valores Mobiliários (CVM), calcula
+os indicadores financeiros em Python, gera uma explicação em linguagem acessível
+com um modelo de linguagem e verifica automaticamente cada número dessa
+explicação contra o documento de origem.
 
----
+## Motivação
 
-## O problema que resolve
+As demonstrações contábeis entregues à CVM são públicas e gratuitas, mas de
+leitura difícil para quem não tem formação em contabilidade: os relatórios
+completos passam de duzentas páginas e os dados estruturados vêm distribuídos em
+CSVs anuais que reúnem todas as companhias, com valores expressos em milhares de
+reais e plano de contas que varia por setor.
 
-Relatórios financeiros (ITR e DFP) entregues à CVM são longos, técnicos e fragmentados em dezenas de arquivos CSV. Ler e interpretar esses dados manualmente exige horas de trabalho e conhecimento contábil específico. O fundIA automatiza esse processo: dado um ticker como `PETR4`, baixa os dados mais recentes, extrai o que importa e entrega uma análise em texto direto.
+Modelos de linguagem traduzem esse material com fluência, mas podem produzir
+números incorretos em texto convincente — risco incompatível com o domínio
+financeiro, em que o leitor leigo não tem como perceber o erro. Este projeto
+adota uma separação estrita de responsabilidades:
 
----
+    fonte oficial → cálculo determinístico → redação pelo modelo → auditoria
 
-## Como funciona
+O modelo de linguagem não executa nenhuma operação aritmética. Ele recebe os
+indicadores já calculados e formatados, e sua saída é integralmente verificada
+por um auditor determinístico, que produz a métrica central do sistema: a **taxa
+de conformidade numérica**, acompanhada da proveniência de cada verificação.
 
-O pipeline executa 8 etapas em sequência:
+## Arquitetura
 
-1. **Validação do ticker** — resolve o ticker para o código CVM em três níveis: mapa embutido no código, `dados/ticker_map.csv` (cache local) e, por fim, o cadastro oficial FCA da CVM, com match exato por `Codigo_Negociacao` e junção por CNPJ para obter código CVM e nome da empresa
-2. **Busca do documento** — localiza o ITR ou DFP mais recente disponível no portal de dados abertos da CVM
-3. **Download** — baixa os arquivos estruturados e salva em cache local para evitar downloads repetidos
-4. **Extração de seções** — lê os CSVs e organiza as seções contábeis relevantes em texto
-5. **Chunking e indexação** — divide o texto em chunks com sobreposição e indexa embeddings no ChromaDB
-6. **Recuperação RAG** — recupera os chunks mais relevantes separando contexto numérico do narrativo
-7. **Métricas + narrativa** — as métricas (receita, lucro, variações, margem, dívida bruta/líquida) são calculadas **deterministicamente em Python** a partir do documento estruturado (`modulos/metricas.py`), eliminando erros de aritmética do LLM. Os períodos de comparação são rotulados conforme a convenção da CVM (`ORDEM_EXERC = PENÚLTIMO`): no ITR, receita e lucro comparam com o **mesmo período do ano anterior**, enquanto caixa e dívidas comparam com o **fechamento do exercício anterior (31/12)**; na DFP, tudo compara com o exercício anterior. Os critérios de endividamento são explícitos: dívida bruta = empréstimos e financiamentos; liquidez total = caixa + aplicações financeiras de curto prazo; dívida líquida = dívida bruta − liquidez total; passivos de arrendamento (IFRS 16) são informados separadamente na visão ampliada. Instituições financeiras são detectadas automaticamente (plano de contas próprio na CVM): dívida líquida é marcada como não aplicável — captar recursos é o negócio bancário — e os indicadores exibidos passam a ser depósitos de clientes e captação no mercado aberto; em seguida o LLM atua apenas como redator, gerando a narrativa em 7 seções (resumo, receita, lucro, caixa/dívidas, pontos positivos, pontos de atenção, limitações). Se o documento não for parseável (ex.: PDF antigo), o sistema cai no caminho legado de extração via LLM (Prompt 1)
-8. **Auditoria de fidelidade numérica** — cada número citado na narrativa (valores em R$, percentuais, razões) é conferido automaticamente contra o documento da CVM e as métricas calculadas (`modulos/auditoria.py`); o resultado inclui a **taxa de conformidade numérica** e a lista de valores divergentes ou não encontrados (possíveis alucinações)
+O pipeline executa oito etapas em sequência (`modulos/orquestrador.py`):
 
----
+1. **Validação do ticker** (`ticker.py`) — resolve o código de negociação para o
+   código CVM em três níveis: mapa embutido, cache local em
+   `dados/ticker_map.csv` e cadastro oficial FCA da CVM. Ticker não resolvido
+   interrompe a execução, em vez de analisar empresa incorreta.
+2. **Busca do documento** (`cvm.py`) — localiza o ITR ou DFP mais recente da
+   companhia no índice anual da CVM.
+3. **Download dos CSVs** (`cvm.py`) — baixa os dados estruturados (resultado,
+   balanço patrimonial e fluxo de caixa), recorta as linhas da empresa e grava
+   um extrato em `dados/cache/`.
+4. **Extração de seções** (`extracao.py`) — organiza o extrato em seções
+   contábeis identificadas.
+5. **Chunking e indexação** (`chunking.py`) — segmenta o conteúdo e grava os
+   embeddings em uma collection própria do documento no ChromaDB.
+6. **Recuperação** (`recuperacao.py`) — recupera contexto em dois canais
+   independentes, numérico e narrativo.
+7. **Cálculo e narrativa** (`metricas.py`, `prompt2.py`) — os indicadores são
+   calculados em Python, com o critério de cada agregado declarado na saída; o
+   modelo de linguagem recebe os valores prontos e redige a análise em sete
+   seções. Documentos não parseáveis recorrem à extração via modelo
+   (`prompt1.py`).
+8. **Auditoria de fidelidade numérica** (`auditoria.py`) — extrai da narrativa
+   todo valor monetário, percentual e razão, e os confere contra as linhas do
+   documento e os indicadores calculados, verificando magnitude, sinal e direção
+   dos verbos. Cada verificação registra sua proveniência.
 
-## Tecnologias utilizadas
+Os vereditos possíveis são `CONFERE`, `DIVERGENTE` (com motivo),
+`NAO_ENCONTRADO` e `IGNORADO`. A taxa de conformidade numérica é a proporção de
+valores auditáveis com veredito `CONFERE`.
 
-- Python 3.11+
-- FastAPI + Uvicorn — API REST do backend (progresso em tempo real via SSE)
-- React + Vite — interface web (`frontend/`)
-- Streamlit — interface legada (`app.py`, opcional)
-- Google Gemini 2.5 Flash — geração de texto
-- sentence-transformers (`paraphrase-multilingual-mpnet-base-v2`) — embeddings
-- ChromaDB — banco vetorial local persistente em disco (`chroma_db/`, via `PersistentClient`)
-- RAGAS — avaliação automática de qualidade RAG
-- Portal de Dados Abertos CVM — fonte dos documentos
+As decisões de critério e o histórico técnico do projeto estão em
+[`NOTAS_DESENVOLVIMENTO.md`](NOTAS_DESENVOLVIMENTO.md).
 
----
+## Requisitos
 
-## Como rodar
+- Python 3.12
+- Node.js 18 ou superior (para a interface React)
+- Chave de API do Google Gemini
+
+## Instalação
 
 ```bash
-# 1. Instale as dependências do backend
 pip install -r requirements.txt
-
-# 2. Instale as dependências do frontend (requer Node.js 18+)
 cd frontend && npm install && cd ..
+```
 
-# 3. Defina a chave da API do Gemini
-set GEMINI_API_KEY=sua_chave_aqui   # Windows
-export GEMINI_API_KEY=sua_chave_aqui  # Linux/macOS
-# (alternativa: salve a chave em api_key.txt na raiz do projeto)
+Configure a chave da API por variável de ambiente ou arquivo local:
 
-# 4. Inicie o backend (terminal 1)
+```bash
+export GEMINI_API_KEY="sua-chave"        # Linux/macOS
+$env:GEMINI_API_KEY = "sua-chave"        # Windows PowerShell
+```
+
+Alternativamente, grave a chave em `api_key.txt` na raiz do projeto. Esse
+arquivo está listado no `.gitignore` e não deve ser versionado.
+
+## Execução
+
+Em dois terminais:
+
+```bash
 uvicorn api:app --port 8000
+```
 
-# 5. Inicie o frontend (terminal 2)
+```bash
 cd frontend && npm run dev
 ```
 
-Acesse `http://localhost:5173`, digite o ticker (ex: `WEGE3`), escolha o tipo de documento (ITR ou DFP) e clique em **Analisar**. O progresso das 7 etapas aparece em tempo real (Server-Sent Events).
+A interface fica em `http://localhost:5173`. Informe o ticker (por exemplo,
+`WEGE3`), escolha o tipo de documento — ITR trimestral ou DFP anual — e execute
+a análise. O progresso das oito etapas é transmitido em tempo real por
+Server-Sent Events.
 
-A interface Streamlit legada continua disponível: `streamlit run app.py`.
+A primeira execução baixa o modelo de embeddings (aproximadamente 1 GB) e o
+pacote anual da CVM, e por isso é sensivelmente mais lenta.
 
----
+A interface Streamlit, versão inicial do projeto preservada para comparação,
+é iniciada com `streamlit run app.py`.
 
-## Estrutura de arquivos
+## Estrutura
 
 ```
-api.py                          — backend FastAPI (SSE de progresso + PDF)
-frontend/                       — interface React (Vite); consome a API via proxy
-app.py                          — interface Streamlit legada
-config.py                       — todas as constantes configuráveis do projeto
+api.py                     backend FastAPI: progresso via SSE, fonte e PDF
+app.py                     interface Streamlit (versão inicial)
+config.py                  constantes de configuração
+requirements.txt           dependências Python com versões
 modulos/
-  orquestrador.py               — executa as 7 etapas do pipeline
-  ticker.py                     — resolve tickers via mapa embutido, ticker_map.csv e cadastro FCA da CVM
-  cvm.py                        — busca e baixa documentos do portal da CVM
-  extracao.py                   — lê os CSVs e extrai seções contábeis
-  chunking.py                   — divide texto em chunks e indexa no ChromaDB
-  recuperacao.py                — recupera contexto numérico e narrativo via RAG
-  metricas.py                   — cálculo determinístico das métricas financeiras
-  auditoria.py                  — auditoria automática de fidelidade numérica da narrativa
-  prompt1.py                    — Prompt 1 (legado): extração via LLM, fallback para PDFs
-  prompt2.py                    — Prompt 2: geração da narrativa em 7 seções
-  relatorio_pdf.py              — gera o PDF da análise (usado pela API)
-avaliacao/
-  coletar_respostas.py          — recupera o contexto RAG das collections já indexadas e chama o Gemini com um prompt de QA próprio (não usa os Prompts 1 e 2 do pipeline)
-  injetar_ground_truth.py       — adiciona respostas de referência ao JSON de entrada
-  rodar_ragas.py                — calcula faithfulness e answer_relevancy via RAGAS
-  respostas_coletadas.json      — entrada da avaliação
-  resultados_ragas.json         — saída com scores por amostra e médias
+  orquestrador.py          executa as oito etapas do pipeline
+  ticker.py                resolução de ticker para código CVM
+  cvm.py                   busca e download dos dados da CVM
+  extracao.py              leitura dos CSVs e separação em seções
+  chunking.py              segmentação e indexação vetorial
+  recuperacao.py           recuperação de contexto (canais numérico e narrativo)
+  metricas.py              cálculo determinístico dos indicadores
+  auditoria.py             auditoria de fidelidade numérica
+  prompt1.py               extração via modelo (caminho alternativo)
+  prompt2.py               geração da narrativa em sete seções
+  relatorio_pdf.py         geração do PDF da análise
+frontend/                  interface React (Vite)
+avaliacao/                 experimentos de avaliação e artefatos de resultado
 dados/
-  cache/                        — documentos baixados da CVM (evita re-download)
-  ticker_map.csv                — cache local de tickers resolvidos via FCA
-  fca_*.csv                     — cadastro FCA da CVM em cache (valor mobiliário + geral)
-  meta_*.csv                    — índices anuais de documentos ITR/DFP em cache
+  ticker_map.csv           mapa ticker → código CVM (versionado)
+  cache/                   extratos da CVM baixados (gerado)
 ```
 
----
+### Dados baixados automaticamente
 
-## Avaliação
+Os índices anuais de documentos e o cadastro FCA (`dados/meta_*.csv`,
+`dados/fca_*.csv`) não são versionados: o pipeline os obtém da CVM na primeira
+execução e os revalida a cada 24 horas. O mesmo vale para `dados/cache/`
+(extratos por empresa) e `chroma_db/` (banco vetorial). Nenhuma ação manual é
+necessária — basta executar uma análise.
 
-A qualidade do sistema é medida em duas frentes complementares:
+## Tecnologias
 
-**1. Taxa de conformidade numérica** (própria do projeto) — a etapa 8 do pipeline confere automaticamente cada número citado na narrativa contra o documento oficial da CVM, com tolerância de arredondamento. Enquanto o RAGAS mede consistência semântica, esta métrica mede exatidão aritmética — e detecta alucinações numéricas.
+| Componente | Versão |
+|---|---|
+| Python | 3.12 |
+| FastAPI | 0.136.3 |
+| Uvicorn | 0.46.0 |
+| google-genai (Gemini 2.5 Flash) | 2.2.0 |
+| ChromaDB | 1.5.9 |
+| sentence-transformers | 5.5.0 |
+| pandas | 2.2.3 |
+| pdfplumber | 0.11.9 |
+| ReportLab | 4.5.1 |
+| Streamlit | 1.44.1 |
+| React | 19.2 |
+| Vite | 8.1 |
 
-**2. RAGAS** — framework de avaliação usando um modelo de linguagem como juiz (`gemini-2.5-flash`), em duas métricas: **faithfulness** (a resposta se apoia apenas no contexto recuperado?) e **answer\_relevancy** (a resposta responde à pergunta feita? — esta métrica usa também o modelo de embeddings do projeto). Cada amostra é avaliada individualmente com timeout de 120 segundos e salva de forma progressiva, permitindo retomar a avaliação em caso de falha. Os resultados ficam em `avaliacao/resultados_ragas.json`.
+O modelo de embeddings é o `paraphrase-multilingual-mpnet-base-v2`, executado
+localmente.
 
----
+## Reprodução dos experimentos
 
-## Limitações conhecidas
+Os artefatos em `avaliacao/` são as evidências citadas no trabalho e estão
+versionados. Os dois experimentos abaixo não dependem de rede nem de chave de
+API, e reproduzem exatamente os valores publicados.
 
-- Cobre apenas empresas com documentos disponíveis no portal de dados abertos da CVM; empresas estrangeiras e fundos não são suportados
-- A análise depende da qualidade dos CSVs entregues à CVM — dados ausentes ou mal formatados reduzem a cobertura da extração
-- O modelo não tem acesso a informações de mercado em tempo real (cotação, múltiplos de valuation)
-- Documentos muito antigos podem ter formato diferente e falhar na etapa de extração
-- O cache local não expira automaticamente; para reprocessar um ticker, use `forcar=True`
-- A avaliação RAGAS mede consistência interna, não se a análise está "correta" do ponto de vista financeiro
+**Falso-positivo do auditor** — mede com que frequência um número aleatório
+ausente da fonte recebe veredito `CONFERE`, sobre uma base fixa de 282 linhas,
+com 20 sementes e 20 valores por semente:
+
+```bash
+python avaliacao/testar_falso_positivo_auditor.py
+```
+
+Resultado esperado: 0/400 em percentuais, 123/400 (30,8%) em valores monetários
+neutros, e 9/9 no controle de sensibilidade com números legítimos. Saída
+arquivada em `avaliacao/resultado_falso_positivo_2026-07-19.txt`.
+
+**Detecção em frases plantadas** — cinco frases com defeitos conhecidos (erro de
+escala, sinal trocado, direção do verbo) e seus vereditos esperados:
+
+```bash
+python avaliacao/testar_auditor_plantado.py
+```
+
+Resultado esperado: 5/5 vereditos corretos.
+
+Os experimentos seguintes exigem chave de API e acesso à rede:
+
+```bash
+python avaliacao/coletar_respostas.py       # respostas do pipeline RAG
+python avaliacao/injetar_ground_truth.py    # respostas de referência
+python avaliacao/rodar_ragas.py             # faithfulness e answer_relevancy
+python avaliacao/comparar_modelos.py        # narrativas com Flash e com Pro
+```
+
+As dependências do RAGAS estão listadas ao final do `requirements.txt` e não
+são necessárias para executar o sistema.
+
+### Artefatos arquivados
+
+| Arquivo | Conteúdo |
+|---|---|
+| `evidencia_fidelidade_WEGE3.csv` | conferência manual contra a CVM, antes da correção de contas homônimas |
+| `evidencia_fidelidade_WEGE3_v2.csv` | mesma conferência após a correção |
+| `demonstracao_VALE3.json` | execução completa, ITR de março de 2026 |
+| `demonstracao_VALE3_ITR_2026-06-30.json` | execução completa, ITR de junho de 2026 |
+| `auditoria_VALE3_2026-06-30.csv` | trilha de auditoria exportada |
+| `resultados_ragas.json` | scores por amostra e médias |
+| `respostas_coletadas.json` | perguntas, respostas e referências |
+| `comparacao_modelos.json` | narrativas geradas com Flash e com Pro |
+| `auditoria_por_modelo_2026-07-19.json` | conformidade numérica por modelo |
+| `resultado_falso_positivo_2026-07-19.txt` | saída do teste de falso-positivo |
+
+## Limitações
+
+- Cobre apenas companhias com documentos no portal de dados abertos da CVM.
+- A extração depende da qualidade dos CSVs entregues; formatos antigos podem
+  falhar.
+- O EBITDA é uma aproximação declarada e pode divergir do valor divulgado pela
+  companhia.
+- O auditor verifica a existência do número na fonte, não a associação entre
+  número e conceito; não avalia afirmações qualitativas nem números por extenso.
+- O sistema não acessa dados de mercado (cotação, múltiplos) nem emite
+  recomendação de investimento.
+- O cache local não expira automaticamente; use a opção de forçar novo download
+  para reprocessar.
+
+Outras limitações e as medições de falso-positivo estão detalhadas em
+[`NOTAS_DESENVOLVIMENTO.md`](NOTAS_DESENVOLVIMENTO.md).
+
+## Trabalho acadêmico
+
+Este repositório acompanha o Trabalho de Conclusão de Curso do Bacharelado em
+Ciência de Dados e Inteligência Artificial da Universidade Federal da Paraíba.
+
+- Autor: [nome do autor]
+- Orientação: [nome do orientador]
+- Monografia: [link para o texto]
+
+Fonte dos dados: [Portal de Dados Abertos da CVM](https://dados.cvm.gov.br).

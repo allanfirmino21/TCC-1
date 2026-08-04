@@ -219,7 +219,9 @@ def executar_prompt_narrativa(
 
     secoes = _parsear_secoes(texto)
 
-    # Verifica se a narrativa tem conteúdo mínimo nas seções
+    # Abaixo de 200 caracteres somados, o parser encontrou cabeçalhos mas quase
+    # nenhum texto — geralmente geração truncada. Falhar aqui evita exibir uma
+    # análise vazia como se fosse resultado válido.
     total_conteudo = sum(len(v) for v in secoes.values())
     if total_conteudo < 200:
         if finish == "MAX_TOKENS":

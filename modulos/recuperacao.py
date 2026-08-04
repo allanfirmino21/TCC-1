@@ -17,6 +17,16 @@ QUERY_NUMERICO = "receita líquida lucro bruto EBITDA margem operacional lucro l
 QUERY_NARRATIVO = "desempenho operacional comentários da administração perspectivas principais eventos mercado estratégia riscos destaques do período"
 
 def recuperar_contexto(ticker: str, tipo_doc: str, periodo: str) -> Tuple[str, str]:
+    """
+    Recupera o contexto do documento em dois canais independentes.
+
+    O canal numérico prioriza chunks de tabela da base consolidada; o narrativo,
+    trechos discursivos. Separá-los evita que a busca por semelhança devolva só
+    tabelas (que dominam o documento) quando o que falta é contexto textual.
+
+    Returns:
+        (contexto_numerico, contexto_narrativo), já formatados para o prompt.
+    """
     modelo     = SentenceTransformer(MODELO_EMBEDDINGS)
     cliente    = chromadb.PersistentClient(path=CAMINHO_CHROMA)
     collection = cliente.get_collection(nome_collection(ticker, tipo_doc, periodo))

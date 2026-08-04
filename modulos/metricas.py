@@ -45,6 +45,7 @@ def formatar_moeda(valor_mil: Optional[float]) -> str:
 
 
 def formatar_pct(pct: Optional[float], casas: int = 1) -> str:
+    """Formata um percentual com sinal explícito e vírgula decimal ("+6,1%")."""
     if pct is None:
         return "nao_disponivel"
     return f"{pct:+.{casas}f}%".replace(".", ",")
@@ -102,6 +103,14 @@ _PERIODO_ITR = {
 
 
 def rotular_periodos(periodo: str, tipo_doc: str) -> dict:
+    """
+    Devolve os rótulos textuais do período atual e das duas bases de comparação.
+
+    Necessário porque, no ITR, a coluna "anterior" da CVM significa coisas
+    diferentes conforme a demonstração: no resultado é o mesmo período do ano
+    anterior; no balanço é o fechamento do exercício (31/12). O LLM recebe esses
+    rótulos prontos para não descrever a comparação de forma genérica ou errada.
+    """
     m = re.match(r"(\d{4})-(\d{2})-(\d{2})", periodo or "")
     if not m:
         return {

@@ -46,6 +46,7 @@ app.add_middleware(
 
 @app.get("/api/status")
 def status():
+    """Informa se a chave da API Gemini está configurada no servidor."""
     return {
         "api_key_configurada": bool(os.getenv("GEMINI_API_KEY")),
         "versao": "1.0",
@@ -134,6 +135,7 @@ class PedidoPDF(BaseModel):
 
 @app.post("/api/pdf")
 def baixar_pdf(pedido: PedidoPDF):
+    """Gera o PDF da análise a partir das seções já exibidas na interface."""
     pdf = gerar_pdf(pedido.empresa, pedido.ticker, pedido.periodo,
                     pedido.tipo_doc, pedido.secoes)
     nome = f"fundia_{pedido.ticker}_{pedido.periodo}.pdf"

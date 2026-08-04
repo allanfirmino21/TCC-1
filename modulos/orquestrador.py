@@ -1,5 +1,6 @@
 # modulos/orquestrador.py
-import os, time
+import os
+
 from modulos.ticker      import validar_ticker, buscar_nome_empresa
 from modulos.cvm         import buscar_documento_mais_recente, baixar_documento
 from modulos.extracao    import extrair_documento, verificar_qualidade_extracao
@@ -13,6 +14,24 @@ from config              import CAMINHO_CACHE
 
 def analisar(ticker: str, tipo_doc: str = "ITR", forcar: bool = False,
              on_progress: callable = None) -> dict:
+    """
+    Executa as oito etapas do pipeline para um ticker da B3 e devolve a análise.
+
+    Do código de negociação ao selo de auditoria: valida o ticker, baixa o
+    documento mais recente da CVM, calcula as métricas em Python, gera a
+    narrativa com o LLM e audita cada número citado contra a fonte.
+
+    Args:
+        ticker: código de negociação (ex.: "WEGE3").
+        tipo_doc: "ITR" (trimestral) ou "DFP" (anual).
+        forcar: ignora o cache local e baixa novamente da CVM.
+        on_progress: callback (etapa, mensagem) chamado a cada etapa.
+
+    Returns:
+        dict com ticker, nome_empresa, documento, etapas, analise e erro.
+        Em caso de falha, "erro" traz a mensagem e "analise" fica None; a
+        auditoria é opcional (falha nela não invalida a análise).
+    """
     resultado = {
         "ticker":         ticker.upper(),
         "tipo_documento": tipo_doc,
@@ -173,7 +192,6 @@ def analisar(ticker: str, tipo_doc: str = "ITR", forcar: bool = False,
 
     # ── 7b. Prompt 2 — narrativa ───────────────────────────────────────────────
     _log("7/8", "Gerando analise - Prompt 2...", on_progress)
-    time.sleep(1)
     narrativa = executar_prompt_narrativa(
         dados, ctx_nar, ticker.upper(), nome_empresa,
         periodo=meta["periodo"]

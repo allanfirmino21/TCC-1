@@ -1,7 +1,13 @@
 # modulos/ticker.py
-import re, os, io, time, zipfile
+import io
+import os
+import re
+import time
+import zipfile
+
 import pandas as pd
 import requests
+
 from config import BASE_URL_CVM
 
 TICKER_MAP_PATH = "dados/ticker_map.csv"
@@ -103,6 +109,15 @@ TICKER_MAP_EMBUTIDO = {
 }
 
 def validar_ticker(ticker: str) -> dict:
+    """
+    Valida o formato do ticker e resolve o código CVM correspondente.
+
+    Returns:
+        dict com valido (bool) e, se válido, ticker e codigo_cvm; caso
+        contrário, motivo com a mensagem exibida ao usuário. Ticker não
+        encontrado falha explicitamente: analisar a empresa errada seria
+        pior do que não analisar.
+    """
     ticker = ticker.upper().strip()
     # Radical de 4 caracteres (começa com letra, mas pode conter dígito — ex.:
     # B3SA3, da própria B3) + sufixo de 1 ou 2 números.
@@ -126,6 +141,12 @@ def validar_ticker(ticker: str) -> dict:
     return {"valido": True, "ticker": ticker, "codigo_cvm": resultado[0]}
 
 def buscar_codigo_cvm(ticker: str) -> tuple | None:
+    """
+    Resolve ticker → (código CVM, nome) em três níveis, do mais barato ao mais caro.
+
+    Mapa embutido, depois o cache local em dados/ticker_map.csv e, por fim, o
+    cadastro oficial FCA da CVM. Devolve None se nenhum nível resolver.
+    """
     ticker = ticker.upper().strip()
 
     # 1. Mapeamento embutido
@@ -141,6 +162,7 @@ def buscar_codigo_cvm(ticker: str) -> tuple | None:
     return _buscar_no_fca(ticker)
 
 def buscar_nome_empresa(codigo_cvm: str) -> str:
+    """Nome da empresa a partir do código CVM; devolve rótulo genérico se desconhecido."""
     for ticker, (cod, nome) in TICKER_MAP_EMBUTIDO.items():
         if cod == str(codigo_cvm):
             return nome
@@ -151,6 +173,7 @@ def buscar_nome_empresa(codigo_cvm: str) -> str:
     return f"Empresa CVM {codigo_cvm}"
 
 def salvar_mapa_local(ticker: str, codigo_cvm: str, nome: str):
+    """Registra em dados/ticker_map.csv um ticker resolvido pelo FCA, evitando nova consulta."""
     os.makedirs("dados", exist_ok=True)
     mapa = _carregar_mapa_local()
     mapa[ticker.upper()] = (codigo_cvm, nome)

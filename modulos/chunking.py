@@ -16,6 +16,13 @@ logging.getLogger("transformers").setLevel(logging.ERROR)
 logging.getLogger("huggingface_hub").setLevel(logging.ERROR)
 
 def criar_chunks(secoes: List[SecaoDocumento]) -> List[dict]:
+    """
+    Converte as seções do documento em chunks prontos para indexação.
+
+    Tabelas viram um chunk único (quebrá-las separaria a conta do seu valor);
+    seções narrativas longas são divididas com sobreposição. Cada chunk carrega
+    metadados de tipo e base contábil, usados como filtro na recuperação.
+    """
     chunks = []
     for secao in secoes:
         if secao.tipo == "tabela":
@@ -85,6 +92,13 @@ def nome_collection(ticker: str, tipo_doc: str, periodo: str) -> str:
 
 def indexar_documento(ticker: str, chunks: List[dict], tipo_doc: str, periodo: str,
                       forcar: bool = False) -> object:
+    """
+    Gera os embeddings dos chunks e os grava na collection do documento.
+
+    Cada documento tem collection própria (ticker + tipo + período) para que
+    períodos distintos da mesma empresa nunca se misturem na recuperação.
+    Com forcar=True a collection é recriada do zero.
+    """
     modelo  = SentenceTransformer(MODELO_EMBEDDINGS)
     cliente = chromadb.PersistentClient(path=CAMINHO_CHROMA)
     nome    = nome_collection(ticker, tipo_doc, periodo)

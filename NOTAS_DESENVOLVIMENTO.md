@@ -1,224 +1,189 @@
-# CLAUDE.md — Contexto do projeto fundIA
+# Notas de desenvolvimento — fundIA
 
-Este arquivo é o handoff entre sessões do Claude Code. Leia antes de qualquer
-tarefa: ele resume o estado do projeto, as decisões já tomadas e o que falta.
+Registro técnico das decisões de projeto, dos defeitos encontrados durante o
+desenvolvimento e das correções aplicadas. Complementa o `README.md`, que trata
+de instalação e uso; aqui ficam as razões por trás das escolhas e o histórico
+que sustenta as afirmações do trabalho de conclusão de curso.
 
-## O que é o projeto
+## Arquitetura em uma frase
 
-**fundIA** — sistema de análise fundamentalista automatizada para o TCC do
-usuário. Dado um ticker da B3 (ex.: `POMO4`), baixa o ITR/DFP mais recente do
-Portal de Dados Abertos da CVM, calcula métricas financeiras em Python e gera
-uma narrativa em linguagem simples com o Gemini 2.5 Flash, verificada por uma
-auditoria automática de fidelidade numérica.
+O modelo de linguagem não calcula: as métricas são computadas em Python a partir
+dos dados estruturados da CVM, o LLM apenas redige a narrativa e um auditor
+determinístico confere cada número do texto contra a fonte.
 
-- **Backend**: FastAPI (`api.py`, porta 8000) — progresso em tempo real via SSE
-- **Frontend**: React + Vite (`frontend/`, porta 5173, proxy `/api` → 8000)
-- **Interface legada**: Streamlit (`app.py`) — mantida só para comparação
-- **Chave Gemini**: lida de `GEMINI_API_KEY` ou de `api_key.txt` na raiz
-  (NUNCA commitar esse arquivo)
+Cadeia completa: fonte oficial → cálculo determinístico → redação pelo LLM →
+auditoria → taxa de conformidade numérica.
 
-## Como rodar
+## Decisões de critério
 
-```bash
-# Terminal 1
-uvicorn api:app --port 8000        # demora ~15-30s na primeira subida
-# Terminal 2
-cd frontend && npm run dev         # abrir http://localhost:5173
-```
+Escolhas que não são únicas na literatura e que, por isso, ficam declaradas no
+campo `criterio` do JSON de saída — o leitor pode discordar do critério, mas não
+fica sem saber qual foi usado.
 
-Dependências: `pip install -r requirements.txt` e `cd frontend && npm install`.
+- **Dívida líquida** desconta caixa *e* aplicações financeiras de curto prazo
+  (quase-caixa). Empresas divulgam critérios próprios; o campo `criterio`
+  explicita o adotado.
+- **Passivos de arrendamento** (IFRS 16) entram apenas na visão ampliada, nunca
+  na dívida bruta principal. A linha "Financiamento por Arrendamento" é excluída
+  da soma por ser filha de "Empréstimos e Financiamentos" — somá-la seria dupla
+  contagem.
+- **Variação sobre base negativa** é reportada como razão ("prejuízo 2,5 vezes
+  maior"), não como percentual. "Caiu 150%" partindo de prejuízo confunde o
+  leitor.
+- **Valores monetários** seguem formato canônico "R$ X,XX bilhões/milhões", duas
+  casas decimais, com escala de trilhões para bancos.
+- **Margem acima de 100%** é omitida: típica de holdings, cujo lucro vem de
+  equivalência patrimonial, ela perde o sentido usual de margem sobre receita.
+- **EBITDA** é declarado como aproximação: resultado operacional (DRE) somado à
+  depreciação e amortização da DFC. A CVM não publica EBITDA nos dados
+  estruturados; o valor pode divergir do divulgado pela empresa.
 
-## Pipeline (8 etapas — modulos/orquestrador.py)
+## Tratamento de casos setoriais
 
-1. Validação do ticker (mapa embutido → `dados/ticker_map.csv` → cadastro FCA)
-2. Busca do documento mais recente na CVM
-3. Download dos CSVs estruturados → cache em `dados/cache/*.txt`
-4. Extração de seções (`extracao.py`)
-5. Chunking + indexação no ChromaDB (`chunking.py`)
-6. Recuperação RAG (`recuperacao.py`) — hoje só o contexto narrativo é usado
-7. **Métricas determinísticas** (`metricas.py`) + narrativa via LLM (`prompt2.py`);
-   fallback para extração via LLM (`prompt1.py`) se o documento não for parseável
-8. **Auditoria de fidelidade numérica** (`auditoria.py`) — selo de conformidade
+- **Instituições financeiras** usam plano de contas próprio: não existe
+  "Empréstimos e Financiamentos" nem circulante/não circulante no passivo.
+  A detecção é feita pela receita de intermediação financeira ou pela linha
+  "Depósitos". Para elas, dívida líquida e EBITDA são marcados como
+  `nao_aplicavel` — distinto de `nao_disponivel` — e substituídos por depósitos
+  de clientes e captação no mercado aberto.
+- **Holdings** frequentemente têm receita zerada na linha padrão; o sistema
+  trata o campo como indisponível em vez de exibir "R$ 0", que seria enganoso.
 
-## Histórico: Grupo 1 de melhorias (CONCLUÍDO e verificado)
+## Histórico de defeitos e correções
 
-Motivado por auditorias manuais de POMO4 (Marcopolo, CVM 8451) e ZAMP3
-(Zamp, CVM 24317), ITR 2026-03-31:
+Os dois primeiros casos são citados no texto do TCC e permanecem rastreáveis
+pelos artefatos indicados.
 
-1. **Cálculo determinístico** (`metricas.py`): o LLM não faz mais aritmética —
-   era fonte de erros de arredondamento em cascata (margem 15,94% vs exata
-   15,99%). O LLM é só redator. Formato do JSON compatível com o antigo Prompt 1.
-2. **Auditoria automática** (`auditoria.py`): confere cada número da narrativa
-   (moedas, percentuais, razões) contra o documento CVM + métricas calculadas.
-   Vereditos: CONFERE / DIVERGENTE / NAO_ENCONTRADO / IGNORADO ("R$ 100"
-   didático). Métrica original do TCC: **taxa de conformidade numérica**.
-3. **Períodos de comparação corretos**: no ITR, DRE compara com o mesmo
-   trimestre do ano anterior; balanço compara com 31/12 anterior (convenção
-   `ORDEM_EXERC = PENÚLTIMO` dos CSVs da CVM). Rótulos em `rotular_periodos()`.
-4. **Critérios explícitos de dívida**: liquidez total = caixa + aplicações
-   financeiras de curto prazo; dívida líquida = empréstimos − liquidez total;
-   arrendamentos (IFRS 16) informados separadamente na visão ampliada
-   ("Financiamento por Arrendamento" é excluído da soma — é filha de
-   Empréstimos, evita dupla contagem). Campo `criterio` declara as definições.
+### Contas homônimas no pareamento atual/anterior
 
-### Endurecimento do auditor (pós-verificação independente)
+O cache pareava o valor atual de uma conta com o valor anterior de outra de
+**mesmo nome**. Na WEG (WEGE3, ITR de 31/03/2026), "Aplicações Financeiras"
+existe em duas rubricas distintas do ativo circulante — `CD_CONTA` 1.01.01.02 e
+1.01.02 — e o pareamento cruzado produziu variação falsa de **+327,6%**
+(4.204.784 contra 983.367, valor anterior da rubrica errada) quando a variação
+real é **−1,2%** (4.204.784 contra 4.255.539). O mesmo defeito afetou
+"Empréstimos e Financiamentos" (`CD_CONTA` 2.01.04): **+197,6%** falso contra
+**−12,7%** real.
 
-Verificação independente (recálculo direto do ZIP oficial da CVM, por
-CD_CONTA) confirmou os cálculos (18/18 números), mas achou 3 furos no auditor,
-todos corrigidos em `auditoria.py`:
-- **Sinal**: "lucrou R$ 1,47 mi" com fato −1,47 → agora DIVERGENTE (marcadores
-  de contexto: prejuízo/perda/negativo vs lucro/ganho; o mais próximo vence)
-- **Tolerância de percentuais**: só a base curada (métricas calculadas) dá
-  CONFERE; match apenas com variações deriváveis do documento → DIVERGENTE.
-  Falso-CONFERE de percentuais aleatórios: 0/400 (20 sementes × 20 valores,
-  ver `testar_falso_positivo_auditor.py`; a medida antiga era 0/20, 1 rodada)
-- **Direção do verbo**: cresceu/caiu deve bater com o sinal da variação;
-  "prejuízo aumentou X%" inverte a polaridade
+Correção: o pareamento passou a usar `CD_CONTA` como chave, não o nome da conta.
 
-Transparência do selo (pacote "quem audita o auditor"): cada verificação
-registra a proveniência (`origem_fato` — linha do documento CVM com valor
-bruto, ou campo das métricas calculadas); o painel React mostra a tabela
-completa de verificações, nota de escopo (o que verifica / não verifica) e
-exportação da trilha em CSV. Botão principal baixa o documento analisado da
-empresa via `GET /api/fonte` (serve o cache `dados/cache/<TICKER>_<TIPO>_
-<PERIODO>.txt`, com sanitização de parâmetros) — a CVM não publica arquivo
-por empresa, só o ZIP anual; o portal RAD (link por empresa) vive fora do ar
-e ficou como botão secundário rotulado "instável", junto com o link para os
-dados abertos. Pendente (a decidir com o usuário): botão "teste o auditor"
-que adultera um número de propósito e mostra o detector pegando — forte para
-a demo da banca.
+Rastreabilidade: `avaliacao/evidencia_fidelidade_WEGE3.csv` registra o estado
+com o defeito, incluindo a aritmética falsa;
+`avaliacao/evidencia_fidelidade_WEGE3_v2.csv` registra o estado corrigido, com
+anotação explícita da correção.
 
-Limitações conhecidas do auditor (documentar no TCC, não corrigidas):
-abreviações "R$ 1,66 bi" viram falso alarme; números por extenso ("dobrou")
-passam sem verificação; moedas neutras têm **30,8% de coincidência acidental**
-(123/400, média 6,15/20 por semente, mín 2 / máx 12 — medido por
-`testar_falso_positivo_auditor.py` com base na densidade de um documento real,
-~280 linhas; a estimativa antiga de ~10% veio de uma rodada única e está
-superada). Enquadramento para a banca: o auditor verifica EXISTÊNCIA do número
-na fonte, não a associação número↔conceito — sinal e direção mitigam nos casos
-com contexto (lucro/prejuízo, verbos de variação).
+### Escala de milhares na narrativa
 
-Teste estatístico de falso-positivo: `testar_falso_positivo_auditor.py` na
-raiz (autocontido, sem CVM/LLM; base de fatos fixa com 282 linhas + métricas
-curadas de exemplo). Rodar com `python testar_falso_positivo_auditor.py`.
-Resultados (2026-07-16): controle de sensibilidade 9/9 CONFERE (legítimos);
-percentuais 0/400 falso-positivos; moedas 123/400 (30,8%).
+Os valores dos CSVs da CVM estão em R$ mil. Ao redigir a análise da DFP da WEG
+(exercício de 2025), o modelo copiou valores brutos da tabela precedidos de
+"R$" — citou "R$ 113.787" e "R$ 165.751" para a conta "Despesas Financeiras"
+(`CD_CONTA` 3.06.02), cujos valores reais são R$ 113,79 milhões e R$ 165,75
+milhões. Erro de três ordens de grandeza, em texto fluente.
 
-(O script `testar_auditor_plantado.py` que demonstrava as frases plantadas foi
-usado e apagado pelo usuário; se precisar de novo, recriar: base de fatos fixa
-+ 5 frases com vereditos esperados, sem CVM/LLM.)
+A auditoria automática sinalizou os dois números. As correções foram aplicadas
+em duas camadas: a regra 6 do `prompt2.py` passou a advertir explicitamente
+sobre a escala, e o auditor ganhou verificação específica que reconhece o padrão
+e emite veredito `DIVERGENTE` com o motivo "valor em R$ mil citado sem conversão
+de escala", em vez do genérico "não encontrado".
 
-### Tratamento de bancos (pós-Grupo 1)
+Rastreabilidade: `modulos/auditoria.py` (tratamento de valores sem unidade) e
+`modulos/prompt2.py` (regra 6).
 
-Bancos usam plano de contas próprio na CVM (sem "Empréstimos e Financiamentos"
-nem circulante/não circulante no passivo). Correções em `metricas.py`:
-- Detecção: receita de "Intermediação Financeira" OU linha "Depósitos" no passivo
-- Dívida bruta/líquida = `nao_aplicavel` (≠ `nao_disponivel`) — prompt2 explica
-  que o indicador não se aplica (captar é o negócio bancário) e NUNCA lista
-  como limitação; o card React mostra "Depósitos" no lugar de "Dívida Líquida"
-- Indicadores substitutos: depósitos de clientes + captação no mercado aberto
-- `formatar_moeda()` ganhou escala trilhões (Itaú: depósitos R$ 1,10 tri);
-  auditor reconhece "trilhão/trilhões"
-- Bug corrigido no parsing: nomes de conta >55 chars estouram o padding do
-  cvm.py e deixam 1 espaço só — regexes de linha usam `\s+` (não `\s{2,}`),
-  ancoradas no "(anterior: ...)". Sem isso, linhas longas ficavam fora da
-  base de fatos do auditor (falso alarme em "Operações de Crédito" do ITUB4).
-Verificado: ITUB4 e BBAS3 detectados como bancos; POMO4/ZAMP3/ITSA4/CXSE3
-inalterados; ITUB4 fim-a-fim com conformidade 21/21 (100%).
+### Acumulado do exercício confundido com trimestre isolado
 
-## Interface React (redesign editorial + fintech)
+Em ITRs do segundo trimestre em diante, os CSVs da CVM trazem duas linhas por
+conta com `ORDEM_EXERC = ÚLTIMO`, distinguidas apenas por `DT_INI_EXERC`: o
+acumulado do ano e o trimestre isolado. O código escolhia a primeira que
+aparecesse no arquivo. No ITR de setembro de 2025 da Gol (GOLL4), o sistema
+reportava R$ 16,0 bilhões (nove meses acumulados) sob o rótulo "3º trimestre" e,
+pior, podia parear receita e lucro de períodos diferentes, corrompendo a margem.
 
-- Temas claro (padrão: papel quente + verde-floresta `#0e7a5f`) e escuro,
-  alternados pelo botão sol/lua; implementação via `data-tema` no `<html>` +
-  variáveis CSS em `index.css`, persistido em `localStorage['fundia-tema']`
-- Fontes self-hosted via npm (`@fontsource-variable/fraunces` títulos serif,
-  `@fontsource-variable/inter` corpo) — a demo funciona sem internet
-- Ícones: `lucide-react` (nada de emoji na UI)
-- Cartões de métrica têm barras comparativas anterior→atual (dois passos do
-  mesmo matiz verde — codificação sequencial, validada pelo skill de dataviz);
-  os valores são parseados das strings formatadas em `parseMoeda()` (Analise.jsx)
-- Progresso das 8 etapas como linha do tempo com checks; painel de auditoria
-  com selo, tabela de proveniência e botões de fonte
-- Armadilha conhecida: instalar dependência npm com o `npm run dev` aberto
-  duplica o React no cache do Vite ("Invalid hook call") — reiniciar o Vite
-- O usuário roda os servidores nos terminais dele (uvicorn 8000 + npm 5173);
-  antes de subir servidor de preview, conferir se as portas já estão em uso
-  (erro WinError 10048) e NUNCA derrubar os processos do usuário. Mudanças em
-  Python exigem restart do uvicorn; o frontend atualiza via HMR
+O defeito passou despercebido porque quase todos os documentos do conjunto de
+teste eram de primeiro trimestre, em que acumulado e trimestre coincidem.
 
-## Decisões de critério (defender na monografia)
+Correção: filtro por `DT_INI_EXERC` mantendo o acumulado (função
+`_manter_acumulado` em `modulos/cvm.py`), aplicado igualmente às colunas atual e
+anterior para garantir bases comparáveis, mais rótulos honestos por mês de
+referência em `rotular_periodos` ("1º semestre (6 meses acumulados)", "9 meses
+acumulados").
 
-- Dívida líquida desconta aplicações financeiras (quase-caixa) — empresas
-  divulgam critérios próprios; o campo `criterio` dá a transparência
-- Variação com base negativa: reportar "prejuízo 2,5× maior", não "caiu 150%"
-- Valores monetários: formato canônico "R$ X,XX bilhões/milhões" (≥1 bi →
-  bilhões), 2 casas decimais — `formatar_moeda()` em `metricas.py`
-- Receita de bancos: "Receitas de Intermediação Financeira"; receita zerada
-  (holdings/seguradoras) tratada como indisponível; margem >100% omitida
-  (holdings — lucro vem de equivalência patrimonial)
+Este defeito é o caso concreto da limitação "existência não é associação" do
+auditor: os dois valores existem no documento, de modo que a verificação de
+existência não o detectaria.
 
-## Correções pós-Grupo 1 (concluídas e verificadas)
+### Demonstração de fluxo de caixa ausente do cache
 
-- **Escala R$ mil na narrativa**: o LLM copiava valores brutos do documento
-  ("R$ 113.787" quando a linha da CVM dizia 113.787 mil = R$ 113,8 mi).
-  Corrigido na regra 6 do `prompt2.py` (aviso explícito de escala) e no
-  auditor (fallback: "R$ X" sem unidade que bate com um fato em R$ mil vira
-  DIVERGENTE com motivo "valor em R$ mil citado sem conversão de escala").
-- **Falso alarme de sinal**: "variação negativa de X%, chegando a R$ Y" fazia
-  o marcador "negativa" reivindicar moeda negativa — `_sinal_contexto` agora
-  neutraliza "variação negativa/positiva" antes da busca por marcadores.
-- **Link RAD https**: o índice da CVM traz `LINK_DOC` em `http://`, mas o
-  servidor RAD só responde em `https://` — normalizado em `cvm.py` e no botão
-  React ("Relatório completo — ZIP oficial (RAD)", agora com destaque e antes
-  de "Dados abertos"). O ZIP do RAD contém o PDF completo (200+ págs), que às
-  vezes vem com padding de bytes nulos após o %%EOF (defeito da CVM).
-- **Chip "caixa líquido"**: card de Dívida Líquida mostra chip verde quando o
-  valor é negativo (prop `nota` genérico no componente `Metrica`).
+A CVM publica a DFC em dois métodos: indireto (`DFC_MI`), usado pela quase
+totalidade das empresas e único que traz a linha de depreciação e amortização, e
+direto (`DFC_MD`). O download pedia apenas o método direto, de modo que nenhum
+cache continha a DFC e o EBITDA ficava permanentemente indisponível. Correção:
+tentar o método indireto primeiro, com deduplicação por título de seção.
 
-## Próximos passos (Grupo 2 — aprovado pelo orientador)
+A soma de depreciação e amortização tem três salvaguardas, todas motivadas por
+casos reais: limitar-se ao bloco operacional; excluir por nome os homônimos que
+representam pagamento de dívida ("Amortização de Empréstimos", "de Debêntures",
+"de passivos de arrendamento" — três armadilhas presentes na Itaúsa); e exigir
+sinal positivo, já que ajustes de D&A nunca são desembolsos.
 
-5. **Avaliação em lote** (não iniciado): pipeline + conformidade numérica +
-   RAGAS para 15–30 empresas de setores variados; tabela consolidada
-   (capítulo de Resultados). Infra em `avaliacao/`. NOTA: a rodada antiga de
-   RAGAS (3 tickers) deu faithfulness 0,44 comprovadamente por artefato do
-   juiz LLM (auditoria manual confirmou 18/18 números) — no lote, apresentar
-   RAGAS e conformidade lado a lado como argumento da métrica própria.
-6. **Estudo de ablação do RAG** (não iniciado): comparar RAG atual vs mais
-   chunks vs documento inteiro no contexto. Fundamenta a escolha arquitetural.
-7. **EBITDA aproximado via DFC** — ✅ CONCLUÍDO (verificado fim-a-fim,
-   WEGE3 27/27 na auditoria). Detalhes:
-   - A CVM publica a DFC em 2 métodos: `DFC_MI_con` (indireto, ~98% das
-     empresas, tem a linha de D&A) e `DFC_MD_con` (direto). O bug original:
-     `cvm.py` só pedia o MD → nenhum cache tinha DFC. Agora tenta MI primeiro
-     (títulos iguais, deduplicação em `secoes_gravadas`).
-   - `metricas.py`: `_somar_depreciacao_amortizacao()` soma D&A da DFC com
-     3 guardas — só o bloco operacional (para antes de "Caixa Líquido
-     Atividades de Investimento"), exclusão por nome (Amortização de
-     Empréstimos/Debêntures/passivos = pagamento de dívida, não D&A) e
-     sinal (ajustes de D&A são sempre positivos). EBITDA = EBIT (DRE 3.05)
-     + D&A, com `criterio` declarando a aproximação; bancos → `nao_aplicavel`.
-   - Nomes de D&A variam: "Depreciação, amortização e exaustão" (WEG),
-     "Depreciações e amortizações" (POMO), 2 linhas na ZAMP (D&A + amortização
-     de arrendamentos IFRS16, ambas legítimas), armadilhas na ITSA (3 falsas).
-   - Caches antigos não têm a seção DFC — regenerar com "Forçar novo download"
-     (os 5 de teste ITR já foram regenerados; DFPs antigos ainda sem DFC →
-     EBITDA `nao_disponivel`, caminho gracioso mantido).
-   - Card React mostra "EBITDA (aproximado)" com delta e barras.
+### Falso alarme na verificação de sinal
 
-Ideia aprovada para o TCC 2 (não implementar agora): **seletor de
-indicadores** — usuário escolhe indicadores extras de um cardápio; Python
-calcula do cache, LLM explica em 2-3 frases, auditor confere (mesmo fluxo
-determinístico→redator→auditor em miniatura).
+A frase "variação negativa de 19,8%, chegando a R$ 18,55 bilhões" fazia o
+auditor interpretar "negativa" como reivindicação de valor monetário negativo,
+gerando divergência indevida. A expressão qualifica o percentual, não a moeda:
+`_sinal_contexto` passou a neutralizar "variação negativa/positiva" antes de
+procurar marcadores de sinal.
 
-Grupo 3 (menor prioridade): testes pytest, build único de produção
-(`npm run build` + FastAPI servindo estático), histórico SQLite, análise
-multi-período.
+### Ticker com dígito no radical
 
-## Convenções
+O validador exigia quatro letras seguidas de dígitos, o que rejeitava B3SA3 — a
+própria B3. Corrigido para aceitar dígito a partir do segundo caractere do
+radical.
 
-- Código e comentários em português; nomes de funções/variáveis em português
-- Interfaces preservam o formato do JSON de `dados_extraidos` (React,
-  Streamlit, PDF e prompt2 dependem dele)
-- Testes/scripts temporários no scratchpad da sessão, não na raiz do projeto
-- Empresas de teste com cache local: POMO4 e ZAMP3 (casos de lucro e prejuízo);
-  ITUB4/BBAS3 (bancos), ITSA4 (holding) para casos especiais
+## Limitações conhecidas do auditor
+
+Documentadas por honestidade metodológica; nenhuma foi corrigida, por envolver
+mudança de escopo do verificador.
+
+- Não verifica números por extenso ("dobrou", "triplicou") nem afirmações
+  qualitativas.
+- Abreviações informais ("R$ 1,66 bi") podem gerar falso alarme.
+- Verifica a **existência** do número na fonte, não a associação entre número e
+  conceito. Sinal e direção do verbo mitigam os casos com contexto explícito
+  (lucro contra prejuízo, cresceu contra caiu).
+- Coincidência acidental medida em 30,8% para valores monetários neutros e 0%
+  para percentuais (ver `avaliacao/testar_falso_positivo_auditor.py`).
+- A base de fatos inclui as bases individual e consolidada, o que amplia a
+  coincidência acidental. Restringi-la à consolidada exigiria refazer as
+  medições de falso-positivo já reportadas.
+
+## Interface
+
+- Duas interfaces consomem o mesmo pipeline: React (`frontend/`), principal, e
+  Streamlit (`app.py`), versão inicial preservada. Ambas dependem do formato do
+  JSON de `dados_extraidos`.
+- Temas claro e escuro via atributo `data-tema` e variáveis CSS, com preferência
+  persistida no navegador.
+- Fontes e ícones são servidos localmente, sem dependência de rede em execução.
+- Cartões de métrica trazem barras comparativas entre período anterior e atual,
+  o critério de cálculo e uma linha explicativa em linguagem simples.
+
+## Convenções do código
+
+- Código, comentários e identificadores em português.
+- O formato do JSON de `dados_extraidos` é contrato entre backend, as duas
+  interfaces, o gerador de PDF e o Prompt 2 — alterações exigem revisão dos
+  quatro.
+- Comentários explicam por que uma decisão foi tomada, não o que a linha faz.
+- Empresas usadas como caso de teste: POMO4 e ZAMP3 (lucro e prejuízo), WEGE3
+  (caixa líquido), ITUB4 e BBAS3 (bancos), ITSA4 (holding), GOLL4 (trimestre não
+  inicial), VALE3 (demonstração de referência).
+
+## Trabalhos futuros
+
+- Avaliação em lote com 15 a 30 empresas, reportando taxa de conformidade e
+  métricas RAGAS lado a lado.
+- Estudo de ablação da recuperação: configuração atual contra mais fragmentos e
+  contra o documento inteiro no contexto.
+- Seletor de indicadores sob demanda, calculados em Python e explicados pelo
+  LLM, reutilizando o mesmo fluxo de auditoria.
+- Testes automatizados, build único de produção e histórico de análises.

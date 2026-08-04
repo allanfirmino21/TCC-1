@@ -1,5 +1,7 @@
 # modulos/extracao.py
-import re, os
+import os
+import re
+
 import pdfplumber
 from dataclasses import dataclass
 from typing import List
@@ -175,6 +177,14 @@ def _extrair_pdf(caminho: str) -> List[SecaoDocumento]:
     return secoes
 
 def verificar_qualidade_extracao(secoes: List[SecaoDocumento]) -> dict:
+    """
+    Avalia se a extração produziu conteúdo utilizável.
+
+    Returns:
+        dict com extraivel (bool), chars_totais, secoes_identificadas e aviso —
+        mensagem pronta para o usuário quando o documento não é aproveitável
+        (PDF escaneado sem OCR, download truncado).
+    """
     total_chars  = sum(len(s.conteudo) for s in secoes)
     total_secoes = len(secoes)
     extraivel    = total_chars > 100

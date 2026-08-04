@@ -1,17 +1,22 @@
 # Chave de API — nunca versionar
 api_key.txt
 
-# Configuração local do Claude Code — pode conter comandos com segredos
-.claude/settings.local.json
+# Configuração local do editor/ferramentas
+.claude/
 
 # Arquivos temporários de desenvolvimento
 _*.txt
 
-# Banco vetorial — gerado automaticamente
+# Banco vetorial — gerado automaticamente na indexação
 chroma_db/
 
-# Cache de documentos da CVM — gerado automaticamente
+# Cache de documentos da CVM — baixado automaticamente pelo pipeline
 dados/cache/
+
+# Índices e cadastro da CVM — baixados automaticamente (ver README, "Dados").
+# dados/ticker_map.csv é versionado: mapa ticker → código CVM curado à mão.
+dados/fca_*.csv
+dados/meta_*.csv
 
 # Cache do Python
 __pycache__/

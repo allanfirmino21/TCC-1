@@ -35,11 +35,15 @@
 # falso-positivo nem rigidez indevida) — por isso o controle de sensibilidade
 # usa apenas fatos da base curada.
 #
-# Uso:  python testar_falso_positivo_auditor.py
+# Uso:  python avaliacao/testar_falso_positivo_auditor.py
 
+import os
 import random
 import statistics
+import sys
 from types import SimpleNamespace
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from modulos.auditoria import (auditar_narrativa, _fatos_do_documento,
                                _fatos_dos_dados)

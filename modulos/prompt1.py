@@ -216,7 +216,8 @@ def _extrair_json(texto: str) -> dict | None:
       2. Bloco do primeiro '{' até o último '}' — cobre prosa antes/depois
       3. Truncamento: adiciona '}' faltantes para recuperar JSON cortado no limite de tokens
     """
-    # Remove cercas de markdown ```json … ```
+    # O modelo costuma envolver o JSON em cercas de markdown apesar da instrução
+    # em contrário; removê-las é mais barato do que rejeitar a resposta.
     limpo = re.sub(r"```(?:json)?\s*|\s*```", "", texto).strip()
 
     # Tentativa 1: texto completo como JSON
