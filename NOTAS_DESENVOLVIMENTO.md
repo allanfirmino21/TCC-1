@@ -5,6 +5,18 @@ desenvolvimento e das correções aplicadas. Complementa o `README.md`, que trat
 de instalação e uso; aqui ficam as razões por trás das escolhas e o histórico
 que sustenta as afirmações do trabalho de conclusão de curso.
 
+## Estado do projeto
+
+**TCC 1 concluído e aprovado com nota 9,5** (agosto de 2026). O texto entregue —
+*FundIA: verificação automática de fidelidade numérica em análises financeiras
+geradas por IA a partir de documentos da CVM*, orientado pelo Prof. Dr. Hilton
+Martins de Brito Ramalho — apresentou o protótipo funcional e os resultados
+preliminares registrados abaixo.
+
+**Etapa atual: TCC 2** — monografia final e defesa, com prazo até dezembro de
+2026. O trabalho da etapa está listado em "Trabalhos futuros", ao fim deste
+documento.
+
 ## Arquitetura em uma frase
 
 O modelo de linguagem não calcula: as métricas são computadas em Python a partir
@@ -13,6 +25,36 @@ determinístico confere cada número do texto contra a fonte.
 
 Cadeia completa: fonte oficial → cálculo determinístico → redação pelo LLM →
 auditoria → taxa de conformidade numérica.
+
+## Resultados verificados (base do TCC 1)
+
+Números reportados no texto entregue. Cada um corresponde a um artefato
+versionado em `avaliacao/`; os dois experimentos do auditor são reproduzíveis
+localmente, sem rede nem chave de API.
+
+| Resultado | Valor | Artefato |
+|---|---|---|
+| Cobertura de processamento | 17 documentos de 15 empresas | caches em `dados/cache/` |
+| Demonstração do fluxo completo (VALE3) | 46 de 46 valores conformes | `demonstracao_VALE3_ITR_2026-06-30.json`, `auditoria_VALE3_2026-06-30.csv` |
+| Validação manual detalhada (WEGE3) | 17 de 17 campos conferidos | `evidencia_fidelidade_WEGE3_v2.csv` |
+| Falso-positivo em percentuais | 0% (0/400) | `testar_falso_positivo_auditor.py`, `resultado_falso_positivo_2026-07-19.txt` |
+| Falso-positivo em valores monetários | 30,8% (123/400) | idem |
+| RAGAS — relevância da resposta | 0,81 | `resultados_ragas.json` |
+| RAGAS — fidelidade (*faithfulness*) | 0,44 | idem |
+
+O experimento de falso-positivo usa 400 amostras por tipo de valor, geradas a
+partir de 20 sementes com 20 valores cada, sobre uma base fixa de 282 linhas. O
+controle de sensibilidade, com números legítimos, retorna 9 de 9 conformes.
+
+A validação manual da WEGE3 tem **17 campos** — conferidos um a um contra os
+CSVs da CVM, com a conta e o cálculo registrados por linha no arquivo de
+evidência.
+
+O valor de 0,44 em *faithfulness* não indica infidelidade da narrativa: reflete
+a inadequação da métrica a contextos tabulares densos, em que o juiz não associa
+o valor formatado ("R$ 9,47 bilhões") ao valor bruto da tabela (9.468.313, em
+R$ mil). Respostas numericamente corretas foram penalizadas — evidência que
+motiva a auditoria própria.
 
 ## Decisões de critério
 
@@ -70,7 +112,9 @@ Correção: o pareamento passou a usar `CD_CONTA` como chave, não o nome da con
 Rastreabilidade: `avaliacao/evidencia_fidelidade_WEGE3.csv` registra o estado
 com o defeito, incluindo a aritmética falsa;
 `avaliacao/evidencia_fidelidade_WEGE3_v2.csv` registra o estado corrigido, com
-anotação explícita da correção.
+anotação explícita da correção. Ambos os arquivos têm **17 campos** conferidos
+manualmente contra os CSVs da CVM — é a validação manual detalhada citada no
+TCC 1 (17 de 17).
 
 ### Escala de milhares na narrativa
 
@@ -141,20 +185,67 @@ radical.
 
 ## Limitações conhecidas do auditor
 
-Documentadas por honestidade metodológica; nenhuma foi corrigida, por envolver
-mudança de escopo do verificador.
+Declaradas no TCC 1, em quatro planos. Nenhuma foi corrigida: são delimitações
+de escopo, não defeitos, e omiti-las comprometeria a honestidade metodológica do
+trabalho.
 
+### Escopo do instrumento
+
+- O auditor verifica a **existência** do número na fonte, não a **associação
+  entre número e conceito**: confirma que o valor existe no documento, não que
+  foi corretamente rotulado. Sinal e direção do verbo mitigam os casos com
+  contexto explícito (lucro contra prejuízo, cresceu contra caiu), mas não
+  eliminam a limitação. O defeito do acumulado confundido com trimestre isolado,
+  descrito acima, é o caso concreto: os dois valores existem no documento.
+- A coincidência acidental medida — 30,8% em valores monetários neutros contra
+  0% em percentuais — é a expressão quantitativa dessa fronteira.
+- A garantia oferecida é de **correspondência com o que a companhia declarou**,
+  não de correção do que ela declarou.
 - Não verifica números por extenso ("dobrou", "triplicou") nem afirmações
-  qualitativas.
-- Abreviações informais ("R$ 1,66 bi") podem gerar falso alarme.
-- Verifica a **existência** do número na fonte, não a associação entre número e
-  conceito. Sinal e direção do verbo mitigam os casos com contexto explícito
-  (lucro contra prejuízo, cresceu contra caiu).
-- Coincidência acidental medida em 30,8% para valores monetários neutros e 0%
-  para percentuais (ver `avaliacao/testar_falso_positivo_auditor.py`).
+  qualitativas; abreviações informais ("R$ 1,66 bi") podem gerar falso alarme.
 - A base de fatos inclui as bases individual e consolidada, o que amplia a
   coincidência acidental. Restringi-la à consolidada exigiria refazer as
   medições de falso-positivo já reportadas.
+
+### Cobertura setorial e casos de borda
+
+- Em **holdings**, cujas demonstrações não contemplam determinadas contas, os
+  indicadores afetados são reportados como indisponíveis em vez de estimados —
+  escolha que evita preencher lacunas com valores plausíveis e não fundamentados.
+- Em **instituições financeiras**, dívida líquida e EBITDA são marcados como não
+  aplicáveis e substituídos por indicadores de captação, conforme descrito em
+  "Tratamento de casos setoriais".
+- Casos de borda sem tratamento específico: exercício social distinto do ano
+  civil e demonstrações em moeda estrangeira.
+
+### Alcance da avaliação
+
+- A validação manual detalhada cobriu **uma** empresa; a fidelidade nas demais
+  apoia-se no auditor automático.
+- O RAGAS mede a qualidade da **camada de recuperação**, não a fidelidade da
+  narrativa final: as respostas avaliadas resultam de recuperação seguida de
+  consulta direta ao modelo, sem passar pelo cálculo determinístico nem pela
+  redação final. Cobre três empresas e duas métricas.
+- A amostra é **intencional**, composta para expor o sistema a casos difíceis;
+  as taxas obtidas não são estimativa de desempenho sobre a população de
+  companhias abertas.
+- A narrativa não foi avaliada como peça de comunicação: a acessibilidade da
+  linguagem é pressuposto de projeto sustentado pela instrução dada ao modelo,
+  não resultado medido.
+
+### Reprodutibilidade e caminho legado
+
+- O cálculo é determinístico e os dados são públicos, mas a redação depende do
+  Gemini 2.5 Flash, modelo proprietário de API paga. Os números são
+  reproduzíveis e a auditoria roda sobre qualquer narrativa; a narrativa em si,
+  não. O sistema não foi testado com modelos de pesos abertos.
+- O **caminho legado de extração via modelo** (`prompt1.py`), acionado apenas
+  quando o documento não é parseável, produz um JSON sem os campos introduzidos
+  depois da adoção do cálculo determinístico — entre eles `periodos`,
+  `criterio`, `liquidez_total` e o EBITDA calculado. Nenhum documento do conjunto
+  de teste aciona esse caminho, mas, se acionado, a interface degrada em
+  silêncio: some com as barras comparativas e com os rótulos de período. Essa
+  limitação é do código e não consta do texto do TCC 1.
 
 ## Interface
 
@@ -178,12 +269,30 @@ mudança de escopo do verificador.
   (caixa líquido), ITUB4 e BBAS3 (bancos), ITSA4 (holding), GOLL4 (trimestre não
   inicial), VALE3 (demonstração de referência).
 
-## Trabalhos futuros
+## Trabalhos futuros (escopo do TCC 2)
 
-- Avaliação em lote com 15 a 30 empresas, reportando taxa de conformidade e
-  métricas RAGAS lado a lado.
-- Estudo de ablação da recuperação: configuração atual contra mais fragmentos e
-  contra o documento inteiro no contexto.
-- Seletor de indicadores sob demanda, calculados em Python e explicados pelo
-  LLM, reutilizando o mesmo fluxo de auditoria.
-- Testes automatizados, build único de produção e histórico de análises.
+Prazo: monografia final e defesa até dezembro de 2026. Em ordem de prioridade
+para o capítulo de resultados.
+
+1. **Ampliar a validação de fidelidade** para uma amostra maior, com taxa de
+   conformidade por empresa consolidada em tabela. É a lacuna explicitamente
+   apontada no TCC 1: o quarto objetivo específico foi alcançado apenas em
+   parte, por a validação manual detalhada cobrir uma única empresa.
+2. **Estudo de ablação da recuperação**: configuração atual contra mais
+   fragmentos e contra o documento inteiro no contexto. Responde à pergunta,
+   previsível em banca, de por que usar recuperação se o documento estruturado
+   cabe no contexto do modelo.
+3. **Avaliar a narrativa como peça de comunicação**, hoje ausente: acessibilidade
+   e utilidade para o investidor não especializado são pressupostos de projeto,
+   não resultados medidos.
+4. **Testar modelos de pesos abertos** (famílias Llama, Mistral), reduzindo a
+   dependência de API proprietária e verificando se a arquitetura se sustenta
+   com modelos menores.
+5. Seletor de indicadores sob demanda, calculados em Python e explicados pelo
+   modelo, reutilizando o mesmo fluxo de auditoria.
+6. Testes automatizados, build único de produção e histórico de análises.
+
+Melhorias de engenharia pendentes, sem impacto no texto: carregar o modelo de
+embeddings uma única vez por análise (hoje é instanciado em `chunking.py` e
+novamente em `recuperacao.py`, o que esgota a memória em máquinas de 8 GB) e
+reconciliar versões de documento reentregues à CVM.
