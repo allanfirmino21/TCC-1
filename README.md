@@ -234,13 +234,4 @@ são necessárias para executar o sistema.
 Outras limitações e as medições de falso-positivo estão detalhadas em
 [`NOTAS_DESENVOLVIMENTO.md`](NOTAS_DESENVOLVIMENTO.md).
 
-## Trabalho acadêmico
-
-Este repositório acompanha o Trabalho de Conclusão de Curso do Bacharelado em
-Ciência de Dados e Inteligência Artificial da Universidade Federal da Paraíba.
-
-- Autor: [nome do autor]
-- Orientação: [nome do orientador]
-- Monografia: [link para o texto]
-
 Fonte dos dados: [Portal de Dados Abertos da CVM](https://dados.cvm.gov.br).
